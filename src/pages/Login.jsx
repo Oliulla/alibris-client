@@ -1,43 +1,121 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+      } = useForm();
+    
+      const handleLogin = (data) => {
+        console.log(data);
+      };
   return (
     <div className="hero my-10">
-      <div className="hero-content md:w-7/12">
+      <div className="hero-content w-full md:w-7/12">
         <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100 py-6">
           <h3 className="text-center text-3xl text-secondary font-semibold">
             Login
           </h3>
-          <form className="card-body">
+          <form onSubmit={handleSubmit(handleLogin)} className="card-body">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text text-xl">Name</span>
               </label>
               <input
+                {...register("name", { required: "name must be provide" })}
+                aria-invalid={errors.name ? "true" : "false"}
+                type="text"
+                placeholder="Mukut"
+                className="input input-bordered"
+              />
+            </div>
+            {errors.name && (
+              <small role="alert" className="text-red-500">
+                {errors.name?.message}
+              </small>
+            )}
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-xl">Email</span>
+              </label>
+              <input
+                {...register("email", { required: "email must be provide" })}
+                aria-invalid={errors.email ? "true" : "false"}
                 type="email"
                 placeholder="example@gmail.com"
                 className="input input-bordered"
               />
             </div>
+            {errors.email && (
+              <small role="alert" className="text-red-500">
+                {errors.email?.message}
+              </small>
+            )}
+
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text text-xl">Password</span>
               </label>
               <input
+                {...register("password", {
+                  required: "password must be provide",
+                })}
+                aria-invalid={errors.password ? "true" : "false"}
                 type="password"
                 placeholder="......"
                 className="input input-bordered"
               />
             </div>
+            {errors.password && (
+              <small role="alert" className="text-red-500">
+                {errors.password?.message}
+              </small>
+            )}
+
+            <div className="form-control">
+              <label className="label cursor-pointer">
+                <span className="label-text text-xl">Buyer</span>
+                <input
+                  {...register("userType")}
+                  type="radio"
+                  value="buyer"
+                  className="radio checked:bg-blue-500 radio-info"
+                  checked
+                />
+              </label>
+            </div>
+            <div className="form-control">
+              <label className="label cursor-pointer">
+                <span className="label-text text-xl">Seller</span>
+                <input
+                  {...register("userType")}
+                  type="radio"
+                  value="seller"
+                  className="radio checked:bg-blue-500 radio-info"
+                />
+              </label>
+            </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
-          <p className="pl-10">
-            <span>Don't Have An Account?</span>{" "}
-            <Link to="/register" className="text-secondary hover:text-primary underline">Register</Link>
-          </p>
+          <div className="px-10">
+            <p>
+              <span>Don't Have An Account?</span>{" "}
+              <Link
+                to="/register"
+                className="text-secondary hover:text-primary underline"
+              >
+                Register
+              </Link>
+            </p>
+            <p className="text-2xl font-bold mb-2">Or</p>
+            <p className="btn btn-sm">Login with Google</p>
+          </div>
         </div>
       </div>
     </div>

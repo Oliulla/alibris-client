@@ -1,9 +1,14 @@
 import React from "react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthProvider";
+import toast from "react-hot-toast";
+
 
 const Register = () => {
+  const { createUser, updateUser } = useContext(AuthContext);
+
   const {
     register,
     formState: { errors },
@@ -12,6 +17,19 @@ const Register = () => {
 
   const handleRegister = (data) => {
     console.log(data);
+    createUser(data?.email, data?.password)
+    .then(result => {
+        console.log(result.user);
+        // update user name
+        updateUser(data?.name)
+        .then(() => {})
+        .catch(error => console.log(error))
+        toast.success('successfully registerd')
+    })
+    .catch(error => {
+        console.log(error)
+        toast.error(error?.message)
+    })
   };
 
   return (
@@ -102,7 +120,7 @@ const Register = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-primary">Register</button>
             </div>
           </form>
           <div className="px-10">
@@ -112,7 +130,7 @@ const Register = () => {
                 to="/login"
                 className="text-secondary hover:text-primary underline"
               >
-                Register
+                Login
               </Link>
             </p>
             <p className="text-2xl font-bold mb-2">Or</p>
