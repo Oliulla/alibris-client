@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import toast from "react-hot-toast";
+import GoogleLogin from "../components/GoogleLogin";
 
 
 const Register = () => {
@@ -142,7 +143,8 @@ const Register = () => {
               </Link>
             </p>
             <p className="text-2xl font-bold mb-2">Or</p>
-            <p className="btn btn-sm">Login with Google</p>
+            {/* <p className="btn btn-sm">Login with Google</p> */}
+            <GoogleLogin />
           </div>
         </div>
       </div>
