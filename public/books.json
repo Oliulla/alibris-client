@@ -1,6 +1,5 @@
 [
     {
-        "_id" : "hajhadfdfhdid",
         "categoryName" : "Science Fiction",
         "bookCategoryImg" : "https://i.ibb.co/4FZYDLc/sci-fi1.jpg",
         "categoryText" : "Click and find the best books for Sci-fi",
@@ -30,7 +29,6 @@
         ]
     },
     {
-        "_id" : "hajhdfhdiddfadfd",
         "categoryName" : "Poyetry",
         "bookCategoryImg" : "https://i.ibb.co/tPQ7gth/poetry1.jpg",
         "categoryText" : "Click and find the best books for Poyetry",
@@ -60,7 +58,6 @@
         ]
     },
     {
-        "_id" : "hajhdffddadfhdid",
         "categoryName" : "Novel",
         "bookCategoryImg" : "https://i.ibb.co/SXPKh43/novel2.jpg",
         "categoryText" : "Click and find the best books for Novel",

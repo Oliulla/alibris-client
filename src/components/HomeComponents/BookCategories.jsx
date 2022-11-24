@@ -7,10 +7,10 @@ const BookCategories = () => {
 
   useEffect(() => {
     axios
-      .get("books.json")
-      .then((data) => {
-        console.log(data.data);
-        setCategories(data?.data);
+      .get("http://localhost:5000/categories")
+      .then((productData) => {
+        console.log(productData.data.data);
+        setCategories(productData.data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -24,9 +24,8 @@ const BookCategories = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 gap-8">
         {categories.map((category) => {
           return (
-            <Link to={`/category/${category._id}`}>
+            <Link to={`/category/${category._id}`} key={category._id}>
               <div
-                key={category._id}
                 className="card h-[26rem] shadow-xl image-full"
               >
                 <figure>
