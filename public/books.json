@@ -1,10 +1,12 @@
 [
     {
-        "bookCategory" : "Science Fiction",
+        "_id" : "hajhadfdfhdid",
+        "categoryName" : "Science Fiction",
         "bookCategoryImg" : "https://i.ibb.co/4FZYDLc/sci-fi1.jpg",
+        "categoryText" : "Click and find the best books for Sci-fi",
         "books" : [
             {
-                "bookId" : "a1b2c3d4r",
+                "bookId" : "a1b2cdf3d4r",
                 "imgURL" : "https://i.ibb.co/4FZYDLc/sci-fi1.jpg",
                 "bookName" : "The Martian",
                 "location" : "Barishal",
@@ -15,7 +17,7 @@
                 "sellerName" : "Robin"
             },
             {
-                "bookId" : "a1b2c3d4a",
+                "bookId" : "a1b2dfdac3d4a",
                 "imgURL" : "https://i.ibb.co/RvvC5sc/sci-fi2.jpg",
                 "bookName" : "Snow Crash",
                 "location" : "Gazipur",
@@ -28,8 +30,10 @@
         ]
     },
     {
-        "bookCategory" : "Poyetry",
+        "_id" : "hajhdfhdiddfadfd",
+        "categoryName" : "Poyetry",
         "bookCategoryImg" : "https://i.ibb.co/tPQ7gth/poetry1.jpg",
+        "categoryText" : "Click and find the best books for Poyetry",
         "books" : [
             {
                 "bookId" : "a1b2c3d4n",
@@ -56,8 +60,10 @@
         ]
     },
     {
-        "bookCategory" : "Novel",
+        "_id" : "hajhdffddadfhdid",
+        "categoryName" : "Novel",
         "bookCategoryImg" : "https://i.ibb.co/SXPKh43/novel2.jpg",
+        "categoryText" : "Click and find the best books for Novel",
         "books" : [
             {
                 "bookId" : "a1b2c3d4o",
