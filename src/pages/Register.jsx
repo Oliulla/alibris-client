@@ -5,12 +5,12 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import toast from "react-hot-toast";
 import GoogleLogin from "../components/GoogleLogin";
-
+import axios from "axios";
 
 const Register = () => {
   const { createUser, updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
   const {
@@ -20,26 +20,44 @@ const Register = () => {
   } = useForm();
 
   const handleRegister = (data) => {
-    console.log(data);
+
+    // console.log(data);
     createUser(data?.email, data?.password)
-    .then(result => {
-        console.log(result.user);
+      .then((result) => {
+        // console.log(result.user);
+        toast.success("successfully registered");
+
+        const userInfo = {
+          displayName: data.name,
+        };
 
         // update user name
-        updateUser(data?.name)
-        .then(() => {})
-        .catch(error =>{
+        updateUser(userInfo)
+          .then(() => {
+            saveUserToDb(data?.name, data?.email, data?.role)
+          })
+          .catch((error) => {
             console.log(error?.message);
-            return toast.error(error?.message);
-        })
-        toast.success('successfully registerd');
-        navigate(from, {replace: true})
-    })
-    .catch(error => {
-        console.log(error)
-        toast.error(error?.message)
-    })
+          });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error?.message);
+      });
   };
+
+  // save user to db
+  const saveUserToDb = (name, email, role) => {
+    const user = {name, email, role};
+    axios.post('http://localhost:5000/users', user)
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
 
   return (
     <div className="hero my-10">
@@ -109,7 +127,7 @@ const Register = () => {
               <label className="label cursor-pointer">
                 <span className="label-text text-xl">Buyer</span>
                 <input
-                  {...register("userType")}
+                  {...register("role")}
                   type="radio"
                   value="buyer"
                   className="radio checked:bg-blue-500 radio-info"
@@ -121,7 +139,7 @@ const Register = () => {
               <label className="label cursor-pointer">
                 <span className="label-text text-xl">Seller</span>
                 <input
-                  {...register("userType")}
+                  {...register("role")}
                   type="radio"
                   value="seller"
                   className="radio checked:bg-blue-500 radio-info"

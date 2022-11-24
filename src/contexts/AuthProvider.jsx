@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
   // update user
   const updateUser = displayName => {
     setLoading(true);
-    return updateProfile(auth.currentUser, {displayName: displayName})
+    return updateProfile(auth.currentUser, displayName)
   }
 
   // login with google
