@@ -1,0 +1,86 @@
+[
+    {
+        "bookCategory" : "Science Fiction",
+        "bookCategoryImg" : "https://i.ibb.co/4FZYDLc/sci-fi1.jpg",
+        "books" : [
+            {
+                "bookId" : "a1b2c3d4r",
+                "imgURL" : "https://i.ibb.co/4FZYDLc/sci-fi1.jpg",
+                "bookName" : "The Martian",
+                "location" : "Barishal",
+                "resalePrice" : "200",
+                "originalPrice" : "500",
+                "yearsOfUse" : "1 year",
+                "postTime" : "Thu Nov 24 2022",
+                "sellerName" : "Robin"
+            },
+            {
+                "bookId" : "a1b2c3d4a",
+                "imgURL" : "https://i.ibb.co/RvvC5sc/sci-fi2.jpg",
+                "bookName" : "Snow Crash",
+                "location" : "Gazipur",
+                "resalePrice" : "120",
+                "originalPrice" : "400",
+                "yearsOfUse" : "1 year",
+                "postTime" : "Thu Nov 24 2022",
+                "sellerName" : "Mubin"
+            }
+        ]
+    },
+    {
+        "bookCategory" : "Poyetry",
+        "bookCategoryImg" : "https://i.ibb.co/tPQ7gth/poetry1.jpg",
+        "books" : [
+            {
+                "bookId" : "a1b2c3d4n",
+                "imgURL" : "https://i.ibb.co/tPQ7gth/poetry1.jpg",
+                "bookName" : "Sanchita",
+                "location" : "Barishal",
+                "resalePrice" : "220",
+                "originalPrice" : "450",
+                "yearsOfUse" : "1 year",
+                "postTime" : "Thu Nov 24 2022",
+                "sellerName" : "Subin"
+            },
+            {
+                "bookId" : "a1b2c3d4d",
+                "imgURL" : "https://i.ibb.co/XswG7Lb/poetry2.jpg",
+                "bookName" : "Bidrohi",
+                "location" : "Khulna",
+                "resalePrice" : "100",
+                "originalPrice" : "240",
+                "yearsOfUse" : "1 year",
+                "postTime" : "Thu Nov 24 2022",
+                "sellerName" : "Anisul"
+            }
+        ]
+    },
+    {
+        "bookCategory" : "Novel",
+        "bookCategoryImg" : "https://i.ibb.co/SXPKh43/novel2.jpg",
+        "books" : [
+            {
+                "bookId" : "a1b2c3d4o",
+                "imgURL" : "https://i.ibb.co/SXPKh43/novel2.jpg",
+                "bookName" : "Hamlet",
+                "location" : "Dhaka",
+                "resalePrice" : "300",
+                "originalPrice" : "690",
+                "yearsOfUse" : "1 year",
+                "postTime" : "Thu Nov 24 2022",
+                "sellerName" : "Robin"
+            },
+            {
+                "bookId" : "a1b2c3d4m",
+                "imgURL" : "https://i.ibb.co/z25kNVm/novel1.jpg",
+                "bookName" : "King Lear",
+                "location" : "Sylhet",
+                "resalePrice" : "400",
+                "originalPrice" : "780",
+                "yearsOfUse" : "1 year",
+                "postTime" : "Thu Nov 24 2022",
+                "sellerName" : "Robin"
+            }
+        ]
+    }
+]

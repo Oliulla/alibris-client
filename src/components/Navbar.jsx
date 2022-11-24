@@ -20,7 +20,7 @@ const handleLogOut = () =>{
 }
 
   return (
-    <div className="navbar bg-primary text-base-100 md:px-10 lg:px-20 py-6 lg:py-8">
+    <nav className="navbar bg-primary text-base-100 md:px-10 lg:px-20 py-6 lg:py-8 sticky top-0 z-50">
       <div className="flex-1">
         <Link to="/" className="normal-case md:text-2xl font-bold">
           alibris.com
@@ -73,7 +73,7 @@ const handleLogOut = () =>{
           </>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 

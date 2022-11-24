@@ -1,17 +1,34 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
-    const {
-        register,
-        formState: { errors },
-        handleSubmit,
-      } = useForm();
-    
-      const handleLogin = (data) => {
-        console.log(data);
-      };
+  const { userLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const handleLogin = (data) => {
+    // login user
+    userLogin(data?.email, data?.password)
+      .then((result) => {
+        toast.success("successfully logged in");
+        navigate(from, {replace: true})
+      })
+      .catch((error) => {
+        toast.error(error?.message);
+      });
+  };
+
   return (
     <div className="hero my-10">
       <div className="hero-content w-full md:w-7/12">
@@ -20,24 +37,6 @@ const Login = () => {
             Login
           </h3>
           <form onSubmit={handleSubmit(handleLogin)} className="card-body">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text text-xl">Name</span>
-              </label>
-              <input
-                {...register("name", { required: "name must be provide" })}
-                aria-invalid={errors.name ? "true" : "false"}
-                type="text"
-                placeholder="Mukut"
-                className="input input-bordered"
-              />
-            </div>
-            {errors.name && (
-              <small role="alert" className="text-red-500">
-                {errors.name?.message}
-              </small>
-            )}
-
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-xl">Email</span>
@@ -76,29 +75,6 @@ const Login = () => {
               </small>
             )}
 
-            <div className="form-control">
-              <label className="label cursor-pointer">
-                <span className="label-text text-xl">Buyer</span>
-                <input
-                  {...register("userType")}
-                  type="radio"
-                  value="buyer"
-                  className="radio checked:bg-blue-500 radio-info"
-                  checked
-                />
-              </label>
-            </div>
-            <div className="form-control">
-              <label className="label cursor-pointer">
-                <span className="label-text text-xl">Seller</span>
-                <input
-                  {...register("userType")}
-                  type="radio"
-                  value="seller"
-                  className="radio checked:bg-blue-500 radio-info"
-                />
-              </label>
-            </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>

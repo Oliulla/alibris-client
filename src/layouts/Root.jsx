@@ -10,7 +10,7 @@ const Root = () => {
       <Outlet />
       <Footer />
     </>
-  );
+  )
 };
 
 export default Root;
