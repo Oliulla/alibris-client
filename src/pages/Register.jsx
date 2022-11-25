@@ -5,7 +5,8 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import toast from "react-hot-toast";
 import GoogleLogin from "../components/GoogleLogin";
-import axios from "axios";
+// import axios from "axios";
+import { saveUserToDb } from "../api/saveUserToDb";
 
 const Register = () => {
   const { createUser, updateUser } = useContext(AuthContext);
@@ -47,17 +48,17 @@ const Register = () => {
       });
   };
 
-  // save user to db
-  const saveUserToDb = (name, email, role) => {
-    const user = {name, email, role};
-    axios.post('http://localhost:5000/users', user)
-    .then(data => {
-      console.log(data);
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }
+  // // save user to db
+  // const saveUserToDb = (name, email, role) => {
+  //   const user = {name, email, role};
+  //   axios.post('http://localhost:5000/users', user)
+  //   .then(data => {
+  //     console.log(data);
+  //   })
+  //   .catch(err => {
+  //     console.log(err)
+  //   })
+  // }
 
   return (
     <div className="hero my-10">

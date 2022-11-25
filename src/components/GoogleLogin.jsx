@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { saveUserToDb } from '../api/saveUserToDb';
 import { AuthContext } from '../contexts/AuthProvider';
 
 const GoogleLogin = () => {
@@ -12,7 +13,10 @@ const GoogleLogin = () => {
 
     const handleGoogleLogin = () => {
         googleLogin()
-        .then(() => {
+        .then((result) => {
+            const {displayName, email} = result.user;
+            const role = 'buyer'
+            saveUserToDb(displayName, email, role)
             toast.success('logged in successfully')
             navigate(from, {replace: true})
         })
