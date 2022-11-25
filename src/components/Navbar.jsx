@@ -47,7 +47,7 @@ const handleLogOut = () =>{
             <div className="dropdown dropdown-end pl-4">
               <label tabIndex={0}>
                 <Link
-                  to="/"
+                  to="/dashboard"
                   className="btn btn-outline text-base-100 btn-sm border-secondary text-[0.8rem]"
                 >
                   Dashboard
@@ -58,8 +58,8 @@ const handleLogOut = () =>{
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-black rounded-box w-52"
               >
                 <li>
-                  <Link to="/" className="justify-between">
-                    Profile
+                  <Link to="/dashboard/myorders" className="justify-between">
+                    My Orders
                   </Link>
                 </li>
                 <li>

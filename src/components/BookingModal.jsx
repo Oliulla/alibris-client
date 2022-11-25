@@ -1,14 +1,46 @@
+import axios from "axios";
 import React from "react";
+import toast from "react-hot-toast";
 
-const BookingModal = ({ givenModalInfo }) => {
-    const {email, displayName, bookName, resalePrice} = givenModalInfo;
 
-    const handleBookingSubmit = e => {
-        e.preventDefault()
-        const phoneNumber = e.target.phone.value;
-        const meetLocation = e.target.meetLocation.value;
-        console.log(phoneNumber, meetLocation)
-    }
+const BookingModal = ({ givenModalInfo, setGivenModalInfo }) => {
+  const { email, displayName, bookName, resalePrice, imgUrl } = givenModalInfo;
+
+  const handleBookingSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    const buyerName = form.userName.value;
+    const buyerEmail = form.email.value;
+    const price = form.price.value;
+    const phoneNumber = form.phone.value;
+    const meetLocation = form.meetLocation.value;
+    // console.log(buyerName, buyerEmail, phoneNumber, meetLocation, price)
+
+    const booking = {
+      productImg: imgUrl,
+      title: bookName,
+      price,
+      buyerName,
+      buyerEmail,
+      phoneNumber,
+      meetLocation,
+    };
+
+    // send booking to db
+    axios.post('http://localhost:5000/bookings', booking)
+    .then(data => {
+      console.log(data.data.status);
+      if(data.data.status) {
+        setGivenModalInfo(null)
+        toast.success(data.data.message);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  };
 
   return (
     <>
@@ -22,7 +54,10 @@ const BookingModal = ({ givenModalInfo }) => {
             ✕
           </label>
           <h3 className="text-2xl font-bold">{bookName}</h3>
-          <form onSubmit={handleBookingSubmit} className="grid grid-cols-1 gap-3 mt-10">
+          <form
+            onSubmit={handleBookingSubmit}
+            className="grid grid-cols-1 gap-3 mt-10"
+          >
             <input
               type="text"
               name="userName"
@@ -40,8 +75,8 @@ const BookingModal = ({ givenModalInfo }) => {
               disabled
             />
             <input
-              type="text"
-              name="reselPrice"
+              type="number"
+              name="price"
               defaultValue={resalePrice}
               placeholder="resle price"
               className="input w-full border border-info"
