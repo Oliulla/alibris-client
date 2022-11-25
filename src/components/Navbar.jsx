@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import toast from 'react-hot-toast';
+import DashboardMenu from "./Dashboard/DashboardMenu";
 
 
 const Navbar = () => {
@@ -50,7 +51,7 @@ const handleLogOut = () =>{
                   Dashboard
                 </button>
               </label>
-              <ul
+              {/* <ul
                 tabIndex={0}
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-black rounded-box w-52"
               >
@@ -65,7 +66,8 @@ const handleLogOut = () =>{
                 <li>
                   <Link to="/">Coming..</Link>
                 </li>
-              </ul>
+              </ul> */}
+              <DashboardMenu />
             </div>
             <button onClick={handleLogOut} className="btn btn-outline text-base-100 btn-sm border-secondary text-[0.8rem]">
               Log out

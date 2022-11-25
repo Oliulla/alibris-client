@@ -3,12 +3,17 @@ import DashboardLayout from '../layouts/DashboardLayout';
 import Root from '../layouts/Root';
 import Blogs from '../pages/Blogs';
 import CategoryBooks from '../pages/CategoryBooks';
+import AddProduct from '../pages/Dashboard/AddProduct';
+import AllBuyers from '../pages/Dashboard/AllBuyers';
+import AllSellers from '../pages/Dashboard/AllSellers';
 import MyOrders from '../pages/Dashboard/MyOrders';
+import MyProducts from '../pages/Dashboard/MyProducts';
 import ErrorPage from '../pages/ErrorPage';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import PrivateRoute from '../Routes/PrivateRoute';
+import SellerRoute from '../Routes/SellerRoute';
 
 export const router = createBrowserRouter([
     {
@@ -48,13 +53,25 @@ export const router = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
             {
-                path: '',
+                path: '/dashboard/my-orders',
                 element: <PrivateRoute><MyOrders /></PrivateRoute>
             },
             {
-                path: '/dashboard/myorders',
-                element: <PrivateRoute><MyOrders /></PrivateRoute>
-            }
+                path: '/dashboard/add-product',
+                element: <SellerRoute><AddProduct /></SellerRoute>
+            },
+            {
+                path: '/dashboard/my-products',
+                element: <SellerRoute><MyProducts /></SellerRoute>
+            },
+            {
+                path: '/dashboard/all-sellers',
+                element: <AllSellers />
+            },
+            {
+                path: '/dashboard/all-buyers',
+                element: <AllBuyers />
+            },
         ]
     }
 ])
