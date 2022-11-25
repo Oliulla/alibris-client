@@ -41,17 +41,14 @@ const handleLogOut = () =>{
           </>
         ) : (
           <>
-            <button onClick={handleLogOut} className="btn btn-outline text-base-100 btn-sm border-secondary text-[0.8rem]">
-              Log out
-            </button>
-            <div className="dropdown dropdown-end pl-4">
+            <div className="dropdown dropdown-end pr-4">
               <label tabIndex={0}>
-                <Link
-                  to="/dashboard"
+                <button
+                  
                   className="btn btn-outline text-base-100 btn-sm border-secondary text-[0.8rem]"
                 >
                   Dashboard
-                </Link>
+                </button>
               </label>
               <ul
                 tabIndex={0}
@@ -70,6 +67,9 @@ const handleLogOut = () =>{
                 </li>
               </ul>
             </div>
+            <button onClick={handleLogOut} className="btn btn-outline text-base-100 btn-sm border-secondary text-[0.8rem]">
+              Log out
+            </button>
           </>
         )}
       </div>

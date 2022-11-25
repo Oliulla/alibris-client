@@ -17,6 +17,7 @@ const BookCategories = () => {
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false)
         return;
       });
   }, []);
