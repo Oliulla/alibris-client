@@ -16,7 +16,12 @@ const MyProducts = () => {
         }
     })
 
-    // console.log(myProducts);
+    if(isLoading) {
+        return <p className="text-center text-2xl mt-6">Loading...</p>
+    }
+    if(error) {
+        console.log(error)
+    }
     
 
   return (
@@ -25,7 +30,6 @@ const MyProducts = () => {
       <table className="table w-full">
         <thead>
           <tr>
-            <th></th>
             <th>Name</th>
             <th>Price</th>
             <th>Available/Sold</th>
@@ -34,16 +38,17 @@ const MyProducts = () => {
         </thead>
         <tbody>
             {
-                myProducts.map((categoryProduct, idx) => (categoryProduct.products.map((singleProduct) => {
-                    return <tr key={categoryProduct._id}>
-                    <th>{idx + 1}</th>
+                myProducts.map((categoryProduct) => (categoryProduct.products.map((singleProduct) => {
+                    return <tr key={categoryProduct._id + Math.random()}>
                     <td className="font-bold">{singleProduct.productName}</td>
                     <td>{singleProduct.resalePrice}tk</td>
                     <td>
-                        <button>Available</button>
-                        <button className="ml-4">Advertise</button>
+                        <button className="text-green-700">Available</button>
+                        <button className="ml-4 text-blue-800">Advertise</button>
                     </td>
-                    <td>Delete</td>
+                    <td>
+                        <button className="btn btn-sm bg-red-500">Delete</button>
+                    </td>
                   </tr>
                 })))
             }

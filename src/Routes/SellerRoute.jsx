@@ -11,7 +11,7 @@ const SellerRoute = ({ children }) => {
   // console.log(user, userRole);
 
   if (loading || isLoading) {
-    return <p className="text-center">Loading...</p>;
+    return <p className="text-center mt-28 text-2xl">Loading...</p>;
   }
 
   if (user && userRole === "seller") {
