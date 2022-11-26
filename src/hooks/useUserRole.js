@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 const useUserRole = (email) => {
     const [userRole, setUserRole] = useState("");
     const [isLoading, setIsLoading] = useState(true);
-    console.log(email);
+    // console.log(email);
 
     useEffect(() => {
         if(email) {
@@ -15,6 +15,9 @@ const useUserRole = (email) => {
                 setIsLoading(false);
             })
         }
+        // else {
+        //     setIsLoading(false)
+        // }
     }, [email])
     return [userRole, isLoading];
 }

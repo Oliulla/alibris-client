@@ -8,10 +8,12 @@ import AllBuyers from '../pages/Dashboard/AllBuyers';
 import AllSellers from '../pages/Dashboard/AllSellers';
 import MyOrders from '../pages/Dashboard/MyOrders';
 import MyProducts from '../pages/Dashboard/MyProducts';
+import ReportedItems from '../pages/Dashboard/ReportedItems';
 import ErrorPage from '../pages/ErrorPage';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import AdminRoute from '../Routes/AdminRoute';
 import PrivateRoute from '../Routes/PrivateRoute';
 import SellerRoute from '../Routes/SellerRoute';
 
@@ -66,11 +68,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/all-sellers',
-                element: <AllSellers />
+                element: <AdminRoute><AllSellers /></AdminRoute>
             },
             {
                 path: '/dashboard/all-buyers',
-                element: <AllBuyers />
+                element: <AdminRoute><AllBuyers /></AdminRoute>
+            },
+            {
+                path: '/dashboard/reported-items',
+                element: <AdminRoute><ReportedItems /></AdminRoute>
             },
         ]
     }
