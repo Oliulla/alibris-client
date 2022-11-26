@@ -16,7 +16,7 @@ const AddProduct = () => {
   const postDate = today.toLocaleString()
 
   const handleAddProduct = (data) => {
-
+    // const lowerCaseCategory = data?.categoryName.toLowerCase()
     // console.log(data);
     const sellerCategoryProduct = {
       categoryName: data?.categoryName,
