@@ -1,15 +1,16 @@
 import React from "react";
+import AdvertiseItems from "../../components/HomeComponents/AdvertiseItems";
 import Banner from "../../components/HomeComponents/Banner";
 import BookCategories from "../../components/HomeComponents/BookCategories";
+import HappyClient from "../../components/HomeComponents/HappyClient";
 
 const Home = () => {
   return (
     <>
       <Banner />
       <BookCategories />
-      <div>
-        <h2>Extra meaningfull section</h2>
-      </div>
+      <AdvertiseItems />
+      <HappyClient />
     </>
   );
 };

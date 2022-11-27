@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
@@ -30,7 +31,7 @@ const MyOrders = () => {
   });
 
   if (isLoading)
-    return <p className="text-center text-2xl mt-10">Loading...</p>;
+    return <Loading />
 
   if (error) {
     return <p>{"An error has occurred: " + error.message}</p>;

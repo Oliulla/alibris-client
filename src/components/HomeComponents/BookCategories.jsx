@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Loading from "../Loading";
 
 const BookCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -25,7 +26,7 @@ const BookCategories = () => {
   return (
     <section className="px-4 md:px-8 lg:px-12 my-10">
       {loading ? (
-        <p className="text-center text-xl">Loading...</p>
+        <Loading />
       ) : (
         <>
           <h2 className="text-accent font-semibold text-3xl">

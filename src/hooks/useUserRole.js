@@ -14,10 +14,10 @@ const useUserRole = (email) => {
                 setUserRole(data?.data);
                 setIsLoading(false);
             })
+            .catch(error => {
+                console.log(error);
+            })
         }
-        // else {
-        //     setIsLoading(false)
-        // }
     }, [email])
     return [userRole, isLoading];
 }

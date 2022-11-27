@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
 import useUserRole from "../hooks/useUserRole";
+import Loading from "../components/Loading";
 
 const SellerRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
@@ -11,7 +12,7 @@ const SellerRoute = ({ children }) => {
   // console.log(user, userRole);
 
   if (loading || isLoading) {
-    return <p className="text-center mt-28 text-2xl">Loading...</p>;
+    return <Loading />
   }
 
   if (user && userRole === "seller") {

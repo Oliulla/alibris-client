@@ -36,8 +36,9 @@ const AddProduct = () => {
       ],
     };
 
-    saveSellerProductToDb(sellerCategoryProduct);
-    navigate("/dashboard/my-products")
+    saveSellerProductToDb(sellerCategoryProduct)
+      navigate("/dashboard/my-products")
+    
 
 
     // // save seller products to db
