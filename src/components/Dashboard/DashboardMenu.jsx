@@ -1,40 +1,47 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
-import useUserRole from "../../hooks/useUserRole";
+import useAdmin from "../../hooks/useAdmin";
+// import useUserRole from "../../hooks/useUserRole";
+import useSeller from "../../hooks/useSeller";
+import useBuyer from "../../hooks/useBuyer";
 
 const DashboardMenu = () => {
   const { user } = useContext(AuthContext);
-  const [userRole] = useUserRole(user?.email);
-//   console.log(userRole)
+  // const [userRole] = useUserRole(user?.email);
+  //   console.log(userRole)
+  const [isAdmin] = useAdmin(user?.email);
+  const [isSeller] = useSeller(user?.email);
+  const [isBuyer] = useBuyer(user?.email);
 
-//   const {
-//     data: userRole = {},
-//     isLoading,
-//     error,
-//   } = useQuery({
-//     queryKey: ["user", user?.email],
-//     queryFn: async () => {
-//       try {
-//         const data = await axios.get(
-//           `http://localhost:5000/user/${user?.email}`
-//         );
-//         if (data.status === 200) {
-//           return data?.data?.data;
-//         }
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     },
-//   });
 
-//   if(isLoading) {
-//     return <p className="text-center text-2xl mt-6">Loading...</p>
-//   }
+  //   const {
+  //     data: userRole = {},
+  //     isLoading,
+  //     error,
+  //   } = useQuery({
+  //     queryKey: ["user", user?.email],
+  //     queryFn: async () => {
+  //       try {
+  //         const data = await axios.get(
+  //           `http://localhost:5000/user/${user?.email}`
+  //         );
+  //         if (data.status === 200) {
+  //           return data?.data?.data;
+  //         }
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     },
+  //   });
 
-//   if(error) {
-//     return <p className="text-red-500">{error.message}</p>
-//   }
+  //   if(isLoading) {
+  //     return <p className="text-center text-2xl mt-6">Loading...</p>
+  //   }
+
+  //   if(error) {
+  //     return <p className="text-red-500">{error.message}</p>
+  //   }
 
   return (
     <div>
@@ -42,14 +49,14 @@ const DashboardMenu = () => {
         tabIndex={0}
         className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-black rounded-box w-52"
       >
-        {userRole === "buyer" && (
+        {isBuyer && (
           <li>
             <Link to="/dashboard/my-orders" className="justify-between">
               My Orders
             </Link>
           </li>
         )}
-        {userRole === "seller" && (
+        {isSeller && (
           <>
             <li>
               <Link to="/dashboard/add-product">Add A Product</Link>
@@ -59,7 +66,7 @@ const DashboardMenu = () => {
             </li>
           </>
         )}
-        {userRole === "admin" && (
+        {isAdmin && (
           <>
             <li>
               <Link to="/dashboard/all-sellers">All Sellers</Link>

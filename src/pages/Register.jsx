@@ -35,16 +35,14 @@ const Register = () => {
         // update user name
         updateUser(userInfo)
           .then(() => {
-            saveUserToDb(data?.name, data?.email, data?.role);
-            navigate(from, { replace: true });
-
-            // .then((res) => res.json())
-            // .then(data => {
-            //   console.log(data)
-            // })
-            // .catch(error => {
-            //   console.log(error)
-            // })
+            saveUserToDb(data?.name, data?.email, data?.role)
+            .then(data => {
+              console.log(data)
+              navigate(from, { replace: true });
+            })
+            .catch(error => {
+              console.log(error);
+            })
           })
           .catch((error) => {
             console.log(error?.message);

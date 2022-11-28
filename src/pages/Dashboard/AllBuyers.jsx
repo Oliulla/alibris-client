@@ -1,15 +1,39 @@
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import React from 'react';
 import Loading from '../../components/Loading';
-import useGetUser from '../../hooks/useGetUser';
+// import useGetUser from '../../hooks/useGetUser';
 
 const AllBuyers = () => {
-    const [users, userLoading] = useGetUser();
+    // const [users, userLoading] = useGetUser();
 
-    const buyers = users.filter(user => user?.role === 'buyer');
+    const {data: buyers = [], isLoading, refetch } = useQuery({
+      queryKey: ["buyers"],
+      queryFn: async() => {
+        try {
+          const data = await axios.get(`http://localhost:5000/buyers`);
+          console.log(data.data);
+          return data?.data;
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    })
+  
+    // console.log(users);
+    const handleBuyerDelete = buyerId => {
+      axios.delete(`http://localhost:5000/buyers/${buyerId}`)
+      .then(data => {
+        console.log(data);
+        refetch()
+      })
+    }
+
+    // const buyers = users.filter(user => user?.role === 'buyer');
 
     return (
         <>
-      {userLoading ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <div className="overflow-x-auto mx-auto px-6 my-10">
@@ -31,7 +55,7 @@ const AllBuyers = () => {
                     <td>{buyer?.name}</td>
                     <td>{buyer?.role}</td>
                     <td>
-                      <button>Delete</button>
+                      <button onClick={() => handleBuyerDelete(buyer._id)} className="text-red-600">Delete</button>
                     </td>
                   </tr>
                 );

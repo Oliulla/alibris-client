@@ -2,20 +2,23 @@ import React from "react";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
-import useUserRole from "../hooks/useUserRole";
+// import useUserRole from "../hooks/useUserRole";
 import Loading from "../components/Loading";
+import useBuyer from "../hooks/useBuyer";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
-  const [userRole, isLoading] = useUserRole(user?.email)
-  // console.log(loading, isLoading);
+  const [isBuyer, isBuyerLoading] = useBuyer(user?.email)
+  // const [userRole, isLoading] = useUserRole(user?.email)
+  // console.log(userRole);
 
-  if(loading || isLoading) {
+
+  if(loading || isBuyerLoading) {
     return <Loading />
   }
 
-  if (user && userRole === 'buyer') {
+  if (user && isBuyer) {
     return children;
   }
   return <Navigate to="/login" state={{from: location}} replace />

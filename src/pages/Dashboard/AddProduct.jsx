@@ -16,59 +16,53 @@ const AddProduct = () => {
   // post date
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
-  const postDate = today.toLocaleString()
+  const postDate = today.toLocaleString();
 
   const handleAddProduct = (data) => {
     // console.log(data);
 
-
     // upload image to imgbb
     const image = data.bookImg[0];
     const formData = new FormData();
-    formData.append('image', image);
+    formData.append("image", image);
 
-    const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`
+    const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`;
     fetch(url, {
-      method: 'POST',
-      body: formData
+      method: "POST",
+      body: formData,
     })
-    .then(res => res.json())
-    .then(imgData => {
-      if(imgData.success) {
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          // products for db
+          const sellerProduct = {
+            categoryName: data?.categoryName.toLowerCase(),
+            products: [
+              {
+                email: user?.email,
+                bookName: data?.bookName,
+                location: data?.location,
+                originalPrice: data?.originalPrice,
+                resalePrice: data?.resalePrice,
+                bookCondition: data?.bookCondition,
+                yearOfUse: data?.yearOfUse,
+                sellerPhone: data?.phoneNumber,
+                description: data?.description,
+                postDate: postDate,
+                sellerName: user?.displayName,
+                bookImgUrl: imgData.data.url,
+                isAvailable: true,
+              },
+            ],
+          };
 
-        // products for db
-        const sellerProduct = {
-          categoryName: data?.categoryName.toLowerCase(),
-          email: user?.email,
-          products: [
-            {
-              bookName: data?.bookName,
-              location: data?.location,
-              originalPrice: data?.originalPrice,
-              resalePrice: data?.resalePrice,
-              bookCondition: data?.bookCondition,
-              yearOfUse: data?.yearOfUse,
-              sellerPhone: data?.phoneNumber,
-              description: data?.description,
-              postDate: postDate,
-              sellerName: user?.displayName,
-              bookImgUrl: imgData.data.url,
-              isAvailable: true
-            },
-          ]
-          
-        };
+          // console.log(sellerProduct)
 
-        // console.log(sellerProduct)
-
-        // save seller product to db under category
-        saveSellerProductToDb(sellerProduct)
-        navigate("/dashboard/my-products")
-
-      }
-    })
-
-
+          // save seller product to db under category
+          saveSellerProductToDb(sellerProduct);
+          navigate("/dashboard/my-products");
+        }
+      });
 
     // // save seller products to db
     // fetch("http://localhost:5000/sellerProduct", {

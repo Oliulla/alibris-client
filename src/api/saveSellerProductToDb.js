@@ -15,6 +15,7 @@ export const saveSellerProductToDb = (sellerCategoryProduct) => {
       console.log(data);
       if (data.status) {
         toast.success(data.message);
+        // return data;
       }
     })
     .catch((err) => {

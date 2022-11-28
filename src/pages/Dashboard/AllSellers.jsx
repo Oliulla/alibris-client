@@ -1,17 +1,44 @@
 import React from "react";
 import Loading from "../../components/Loading";
-import useGetUser from "../../hooks/useGetUser";
+// import useGetUser from "../../hooks/useGetUser";
+import { useQuery } from '@tanstack/react-query'
+import axios from "axios";
+// import { useEffect } from "react";
+
 
 const AllSellers = () => {
-  const [users, userLoading] = useGetUser();
-  // console.log(users);
+  // const [users, userLoading] = useGetUser();
 
-  const sellers = users.filter((user) => user?.role === "seller");
+  const {data: sellers = [], isLoading, refetch } = useQuery({
+    queryKey: ["sellers"],
+    queryFn: async() => {
+      try {
+        const data = await axios.get(`http://localhost:5000/sellers`);
+        // console.log(data.data);
+        return data?.data;
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  })
+
+  // console.log(users);
+  const handleSellerDelete = sellerId => {
+    axios.delete(`http://localhost:5000/sellers/${sellerId}`)
+    .then(data => {
+      console.log(data);
+      refetch()
+    })
+  }
+  
+
+  // const sellers = users.filter((user) => user?.role === "seller");
   //   console.log(sellers);
+
 
   return (
     <>
-      {userLoading ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <div className="overflow-x-auto mx-auto px-6 my-10">
@@ -33,7 +60,7 @@ const AllSellers = () => {
                     <td>{seller?.name}</td>
                     <td>{seller?.role}</td>
                     <td>
-                      <button>Delete</button>
+                      <button onClick={() => handleSellerDelete(seller._id)} className="text-red-600">Delete</button>
                     </td>
                   </tr>
                 );
