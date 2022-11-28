@@ -8,8 +8,14 @@ const Home = () => {
   return (
     <>
       <Banner />
-      <BookCategories />
-      <AdvertiseItems />
+      <div className="grid grid-cols-1 lg:grid-cols-12 px-4 md:px-8 lg:px-12 my-10">
+        <div className="lg:col-span-3">
+        <BookCategories />
+        </div>
+        <div className="lg:col-span-9">
+        <AdvertiseItems />
+        </div>
+      </div>
       <HappyClient />
     </>
   );

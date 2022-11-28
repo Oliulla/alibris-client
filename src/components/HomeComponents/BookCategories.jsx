@@ -18,39 +18,29 @@ const BookCategories = () => {
       })
       .catch((error) => {
         console.log(error);
-        setLoading(false)
+        setLoading(false);
         return;
       });
   }, []);
 
   return (
-    <section className="px-4 md:px-8 lg:px-12 my-10">
+    <section className="mb-14">
       {loading ? (
         <Loading />
       ) : (
         <>
           <h2 className="text-accent font-semibold text-3xl">
-            Choose Your Favourite Category
+              Find Your Books
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 gap-8">
+          <div className="flex flex-row lg:flex-col md:gap-2 mt-2">
             {categories.map((category) => {
               return (
-                <Link to={`/category/${category._id}`} key={category._id}>
-                  <div className="card h-[26rem] shadow-xl image-full">
-                    <figure>
-                      <img
-                        src={category?.bookCategoryImg}
-                        alt={category?.categoryName}
-                        className="w-full"
-                      />
-                    </figure>
-                    <div className="card-body">
-                      <h2 className="card-title text-3xl">
-                        {category?.categoryName}
-                      </h2>
-                      <p>{category?.categoryText}</p>
-                    </div>
-                  </div>
+                <Link
+                  to={`/category/${category._id}`}
+                  key={category._id}
+                  className="w-auto font-semibold pr-4 md:px-6 lg:px-0 uppercase hover:text-accent text-blue-700 underline"
+                >
+                  {category.categoryName}
                 </Link>
               );
             })}

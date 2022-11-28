@@ -4,7 +4,7 @@ import axios from "axios";
 export const saveUserToDb = (name, email, role) => {
   const user = { name, email, role };
   axios
-    .post("http://localhost:5000/users", user)
+    .put("http://localhost:5000/users", user)
     .then((data) => {
       console.log(data);
     })

@@ -7,11 +7,12 @@ import { AuthContext } from "../../contexts/AuthProvider";
 
 const MyProducts = () => {
     const {user} = useContext(AuthContext);
+    // console.log(user);
 
     const {data: myProducts = [], isLoading, error} = useQuery({
-        queryKey: ["sellerProduct", user?.email],
+        queryKey: ["myproducts", user?.email],
         queryFn: async() => {
-            const data = await axios.get(`http://localhost:5000/sellerProduct?email=${user?.email}`)
+            const data = await axios.get(`http://localhost:5000/myproducts?email=${user?.email}`)
             // console.log(data.data.data);
             return data?.data?.data;
         }
@@ -41,11 +42,15 @@ const MyProducts = () => {
             {
                 myProducts.map((categoryProduct) => (categoryProduct.products.map((singleProduct) => {
                     return <tr key={categoryProduct._id + Math.random()}>
-                    <td className="font-bold">{singleProduct.productName}</td>
+                    <td className="font-bold">{singleProduct.bookName}</td>
                     <td>{singleProduct.resalePrice}tk</td>
                     <td>
-                        <button className="text-green-700">Available</button>
-                        <button className="ml-4 text-blue-800">Advertise</button>
+                        <button className="text-green-700">
+                          {singleProduct.isAvailable ? "Unsold" : "Sold"}
+                        </button>
+                        <button className="ml-4 text-blue-800">
+                          {singleProduct.isAvailable ? "Advertise" : ""}
+                        </button>
                     </td>
                     <td>
                         <button className="btn btn-sm bg-red-500">Delete</button>

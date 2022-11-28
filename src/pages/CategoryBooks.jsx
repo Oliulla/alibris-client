@@ -16,6 +16,8 @@ const CategoryBooks = () => {
     imgUrl: "",
   });
 
+  console.log(data)
+
   const handleBooking = (bookName, resalePrice, imgURL) => {
     // console.log(bookName, resalePrice)
     setGivenModalInfo({
@@ -30,11 +32,11 @@ const CategoryBooks = () => {
   return (
     <div className="mt-10 mx-auto px-2 lg:px-8">
       <h2 className="text-3xl font-semibold mb-4">
-        All books for {data?.categoryName}
+        All books for <span className="uppercase text-accent">{data?.categoryName}</span>
       </h2>
       <div className="grid grid-cols-1 gap-6">
-        {data?.books?.map((book) => (
-          <Books key={book.bookId} book={book} handleBooking={handleBooking} />
+        {data?.products?.map((book, idx) => (
+          <Books key={idx} book={book} handleBooking={handleBooking} />
         ))}
       </div>
       {

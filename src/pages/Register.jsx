@@ -21,12 +21,12 @@ const Register = () => {
   } = useForm();
 
   const handleRegister = (data) => {
-
     // console.log(data);
     createUser(data?.email, data?.password)
       .then((result) => {
         // console.log(result.user);
         toast.success("successfully registered");
+        console.log(result.user);
 
         const userInfo = {
           displayName: data.name,
@@ -35,12 +35,20 @@ const Register = () => {
         // update user name
         updateUser(userInfo)
           .then(() => {
-            saveUserToDb(data?.name, data?.email, data?.role)
+            saveUserToDb(data?.name, data?.email, data?.role);
+            navigate(from, { replace: true });
+
+            // .then((res) => res.json())
+            // .then(data => {
+            //   console.log(data)
+            // })
+            // .catch(error => {
+            //   console.log(error)
+            // })
           })
           .catch((error) => {
             console.log(error?.message);
           });
-        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error);
@@ -51,7 +59,7 @@ const Register = () => {
   // // save user to db
   // const saveUserToDb = (name, email, role) => {
   //   const user = {name, email, role};
-  //   axios.post('http://localhost:5000/users', user)
+  //   axios.put('http://localhost:5000/users', user)
   //   .then(data => {
   //     console.log(data);
   //   })

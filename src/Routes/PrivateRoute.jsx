@@ -9,6 +9,7 @@ const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
   const [userRole, isLoading] = useUserRole(user?.email)
+  // console.log(loading, isLoading);
 
   if(loading || isLoading) {
     return <Loading />

@@ -10,35 +10,64 @@ const AddProduct = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
+  // img host key for imgbb
+  const imgHostKey = process.env.REACT_APP_imgbb_key;
+
   // post date
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
   const postDate = today.toLocaleString()
 
   const handleAddProduct = (data) => {
-    // const lowerCaseCategory = data?.categoryName.toLowerCase()
     // console.log(data);
-    const sellerCategoryProduct = {
-      categoryName: data?.categoryName,
-      email: user?.email,
-      products: [
-        {
-          productName: data?.productName,
-          location: data?.location,
-          originalPrice: data?.originalPrice,
-          resalePrice: data?.resalePrice,
-          productCondition: data?.productCondition,
-          yearOfPurchase: data?.yearOfPurchase,
-          sellerPhone: data?.sellerPhone,
-          description: data?.description,
-          postDate: postDate
-        },
-      ],
-    };
 
-    saveSellerProductToDb(sellerCategoryProduct)
-      navigate("/dashboard/my-products")
-    
+
+    // upload image to imgbb
+    const image = data.bookImg[0];
+    const formData = new FormData();
+    formData.append('image', image);
+
+    const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`
+    fetch(url, {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.json())
+    .then(imgData => {
+      if(imgData.success) {
+
+        // products for db
+        const sellerProduct = {
+          categoryName: data?.categoryName.toLowerCase(),
+          email: user?.email,
+          products: [
+            {
+              bookName: data?.bookName,
+              location: data?.location,
+              originalPrice: data?.originalPrice,
+              resalePrice: data?.resalePrice,
+              bookCondition: data?.bookCondition,
+              yearOfUse: data?.yearOfUse,
+              sellerPhone: data?.phoneNumber,
+              description: data?.description,
+              postDate: postDate,
+              sellerName: user?.displayName,
+              bookImgUrl: imgData.data.url,
+              isAvailable: true
+            },
+          ]
+          
+        };
+
+        // console.log(sellerProduct)
+
+        // save seller product to db under category
+        saveSellerProductToDb(sellerProduct)
+        navigate("/dashboard/my-products")
+
+      }
+    })
+
 
 
     // // save seller products to db
@@ -74,12 +103,12 @@ const AddProduct = () => {
       >
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Product Name</span>
+            <span className="label-text">Book Name</span>
           </label>
           <input
             type="text"
-            {...register("productName", { required: true })}
-            placeholder="product name"
+            {...register("bookName", { required: true })}
+            placeholder="book name"
             className="input input-bordered w-full max-w-xs input-info"
           />
         </div>
@@ -97,13 +126,13 @@ const AddProduct = () => {
         </div>
         <div>
           <label className="label">
-            <span className="label-text">Product Condition</span>
+            <span className="label-text">Book Condition</span>
           </label>
           <div className="flex items-center gap-1">
             <small>Excellent</small>
             <input
               type="radio"
-              {...register("productCondition")}
+              {...register("bookCondition")}
               value="excellent"
               className="radio w-4 h-4 radio-info"
               checked
@@ -111,14 +140,14 @@ const AddProduct = () => {
             <small className="ml-2">Good</small>
             <input
               type="radio"
-              {...register("productCondition")}
+              {...register("bookCondition")}
               value="good"
               className="radio w-4 h-4 radio-info"
             />
             <small className="ml-2">Fair</small>
             <input
               type="radio"
-              {...register("productCondition")}
+              {...register("bookCondition")}
               value="fair"
               className="radio w-4 h-4 radio-info"
             />
@@ -148,7 +177,7 @@ const AddProduct = () => {
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Product Category</span>
+            <span className="label-text">Book Category</span>
           </label>
           <input
             type="text"
@@ -159,7 +188,7 @@ const AddProduct = () => {
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Product Description</span>
+            <span className="label-text">Book Description</span>
           </label>
           <textarea
             {...register("description")}
@@ -181,20 +210,42 @@ const AddProduct = () => {
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Year of Purchase</span>
+            <span className="label-text">Years of Use</span>
           </label>
           <input
             type="number"
+            {...register("yearOfUse", { required: true })}
+            placeholder="year of use"
+            className="input input-bordered w-full max-w-xs input-info"
+            min={0}
+          />
+        </div>
+        <div className="form-control w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">Years of Purchase</span>
+          </label>
+          <input
+            type="date"
             {...register("yearOfPurchase", { required: true })}
             placeholder="year of purchase"
             className="input input-bordered w-full max-w-xs input-info"
-            min={0}
+          />
+        </div>
+        <div className="form-control w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">Book Image</span>
+          </label>
+          <input
+            type="file"
+            {...register("bookImg", { required: true })}
+            placeholder="book image"
+            className="w-full max-w-xs input-info"
           />
         </div>
         <input
           type="submit"
           value="Submit"
-          className="btn btn-primary w-full max-w-xs"
+          className="btn btn-primary w-full max-w-xs mt-4"
         />
       </form>
     </div>
