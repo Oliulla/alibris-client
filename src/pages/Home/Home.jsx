@@ -5,6 +5,7 @@ import BookCategories from "../../components/HomeComponents/BookCategories";
 import HappyClient from "../../components/HomeComponents/HappyClient";
 
 const Home = () => {
+  
   return (
     <>
       <Banner />

@@ -12,7 +12,7 @@ const AllBuyers = () => {
       queryFn: async() => {
         try {
           const data = await axios.get(`http://localhost:5000/buyers`);
-          console.log(data.data);
+          // console.log(data.data);
           return data?.data;
         } catch (error) {
           console.log(error)
@@ -24,7 +24,7 @@ const AllBuyers = () => {
     const handleBuyerDelete = buyerId => {
       axios.delete(`http://localhost:5000/buyers/${buyerId}`)
       .then(data => {
-        console.log(data);
+        // console.log(data);
         refetch()
       })
     }

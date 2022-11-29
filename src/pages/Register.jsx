@@ -26,19 +26,20 @@ const Register = () => {
       .then((result) => {
         // console.log(result.user);
         toast.success("successfully registered");
-        console.log(result.user);
-
+        // console.log(result.user);
+        
         const userInfo = {
           displayName: data.name,
         };
-
+        
         // update user name
         updateUser(userInfo)
+        .then(() => {
+          saveUserToDb(data?.name, data?.email, data?.role)
           .then(() => {
-            saveUserToDb(data?.name, data?.email, data?.role)
-            .then(data => {
-              console.log(data)
+            console.log(data)
               navigate(from, { replace: true });
+              // console.log(data)
             })
             .catch(error => {
               console.log(error);
@@ -55,15 +56,10 @@ const Register = () => {
   };
 
   // // save user to db
-  // const saveUserToDb = (name, email, role) => {
+  // const saveUserToDb = async(name, email, role) => {
   //   const user = {name, email, role};
-  //   axios.put('http://localhost:5000/users', user)
-  //   .then(data => {
-  //     console.log(data);
-  //   })
-  //   .catch(err => {
-  //     console.log(err)
-  //   })
+  //   const data = await axios.put('http://localhost:5000/users', user);
+  //   return data;
   // }
 
   return (
