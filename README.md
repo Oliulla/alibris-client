@@ -14,4 +14,4 @@
     * firebase auth
     * user dashboard
 
-* Live Link: ![alibris](https://alibris-fc03d.web.app/)
+* Live Link: [alibris](https://alibris-fc03d.web.app)
