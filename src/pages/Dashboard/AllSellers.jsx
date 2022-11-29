@@ -48,7 +48,8 @@ const AllSellers = () => {
               <tr>
                 <th></th>
                 <th>Name</th>
-                <th>Role</th>
+                <th>Email</th>
+                <th>Action</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -58,9 +59,12 @@ const AllSellers = () => {
                   <tr key={seller._id}>
                     <th>{idx + 1}</th>
                     <td>{seller?.name}</td>
-                    <td>{seller?.role}</td>
+                    <td>{seller?.email}</td>
                     <td>
                       <button onClick={() => handleSellerDelete(seller._id)} className="text-red-600">Delete</button>
+                    </td>
+                    <td>
+                      <button className="btn btn-sm btn-primary">Verify</button>
                     </td>
                   </tr>
                 );

@@ -36,7 +36,7 @@ const Register = () => {
         updateUser(userInfo)
         .then(() => {
           saveUserToDb(data?.name, data?.email, data?.role)
-          .then(() => {
+          .then((data) => {
             console.log(data)
               navigate(from, { replace: true });
               // console.log(data)

@@ -1,11 +1,16 @@
 import React from "react";
+import { useContext } from "react";
 import AdvertiseItems from "../../components/HomeComponents/AdvertiseItems";
 import Banner from "../../components/HomeComponents/Banner";
 import BookCategories from "../../components/HomeComponents/BookCategories";
 import HappyClient from "../../components/HomeComponents/HappyClient";
+import { AuthContext } from "../../contexts/AuthProvider";
+// import useSeller from "../../hooks/useSeller";
 
 const Home = () => {
-  
+  // const {user} = useContext(AuthContext);
+  // const [seller, isSellerLoading] = useSeller(user?.email);
+
   return (
     <>
       <Banner />

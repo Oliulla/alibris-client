@@ -15,7 +15,7 @@ const useSeller = (email) => {
         });
     }
   }, [email]);
-  return [isSeller, isSellerLoading,];
+  return [isSeller, isSellerLoading];
 };
 
 export default useSeller;
