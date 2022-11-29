@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 // save user to db
 export const saveSellerProductToDb = (sellerCategoryProduct) => {
   // save seller products to db
-  fetch("http://localhost:5000/categories", {
+  fetch("https://alibris-server.vercel.app/categories", {
     method: "PUT",
     headers: {
       "content-type": "application/json",

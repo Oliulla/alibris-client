@@ -18,7 +18,7 @@ const MyOrders = () => {
     queryFn: async () => {
       try {
         const data = await axios.get(
-          `http://localhost:5000/bookings?email=${user?.email}`
+          `https://alibris-server.vercel.app/bookings?email=${user?.email}`
         );
         if (data.status === 200) {
           return data.data.data;
