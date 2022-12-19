@@ -3,11 +3,16 @@ import Loading from "../../components/Loading";
 // import useGetUser from "../../hooks/useGetUser";
 import { useQuery } from '@tanstack/react-query'
 import axios from "axios";
+// import { useContext } from "react";
+// import { AuthContext } from "../../contexts/AuthProvider";
+import { toast } from "react-hot-toast";
 // import { useEffect } from "react";
 
 
 const AllSellers = () => {
   // const [users, userLoading] = useGetUser();
+  // const {user} = useContext(AuthContext);
+  // console.log(user);
 
   const {data: sellers = [], isLoading, refetch } = useQuery({
     queryKey: ["sellers"],
@@ -34,6 +39,18 @@ const AllSellers = () => {
 
   // const sellers = users.filter((user) => user?.role === "seller");
   //   console.log(sellers);
+
+  // verify sellers
+  const verifySeller = (userEmail) => {
+    axios.put(`http://localhost:5000/sellerVerified/${userEmail}`)
+    .then(data => {
+      console.log(data);
+      toast.success("Successfully verified the seller!!!");
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 
 
   return (
@@ -64,7 +81,7 @@ const AllSellers = () => {
                       <button onClick={() => handleSellerDelete(seller._id)} className="text-red-600">Delete</button>
                     </td>
                     <td>
-                      <button className="btn btn-sm btn-primary">Verify</button>
+                      <button onClick={() => verifySeller(seller?.email)} className="btn btn-sm btn-primary">Verify</button>
                     </td>
                   </tr>
                 );

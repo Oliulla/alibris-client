@@ -8,26 +8,25 @@ import useBuyer from "../../hooks/useBuyer";
 
 const DashboardMenu = () => {
   const { user } = useContext(AuthContext);
-  console.log("from dashboard", user)
+  console.log("from dashboard", user);
   // const [userRole] = useUserRole(user?.email);
-    // console.log(userRole)
+  // console.log(userRole)
   const [isAdmin, isAdminLoading] = useAdmin(user?.email);
   const [isSeller, isSellerLoading] = useSeller(user?.email);
   const [isBuyer, isBuyerLoading] = useBuyer(user?.email);
   console.log("inside dashbord use hook", isAdmin, isSeller, isBuyer);
 
-  if(isSellerLoading) {
+  if (isSellerLoading) {
     return;
   }
 
-  if(isBuyerLoading) {
+  if (isBuyerLoading) {
     return;
   }
 
-  if(isAdminLoading) {
+  if (isAdminLoading) {
     return;
   }
-
 
   //   const {
   //     data: userRole = {},
@@ -64,11 +63,18 @@ const DashboardMenu = () => {
         className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-black rounded-box w-52"
       >
         {isBuyer && (
-          <li>
-            <Link to="/dashboard/my-orders" className="justify-between">
-              My Orders
-            </Link>
-          </li>
+          <>
+            <li>
+              <Link to="/dashboard/my-orders" className="justify-between">
+                My Orders
+              </Link>
+            </li>
+            <li>
+              <Link to="/dashboard/my-wishlists" className="justify-between">
+                My Wishlists
+              </Link>
+            </li>
+          </>
         )}
         {isSeller && (
           <>

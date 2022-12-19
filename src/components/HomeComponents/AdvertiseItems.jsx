@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import Loading from "../Loading";
 
 const AdvertiseItems = () => {
   const {
     data: advertiseProducts = [],
     error,
+    isLoading
   } = useQuery({
     queryKey: ["advertiseProducts"],
     queryFn: async () => {
@@ -26,8 +28,8 @@ const AdvertiseItems = () => {
 
   return (
     <>
-      {!advertiseProducts.length ? (
-        <p className="text-3xl text-slate-800">No books for advertisements</p>
+      {isLoading ? (
+        <Loading />
       ) : (
         <>
           <div className="mb-20">

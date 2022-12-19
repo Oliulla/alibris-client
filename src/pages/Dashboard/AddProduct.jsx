@@ -1,7 +1,6 @@
 import React from "react";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { saveSellerProductToDb } from "../../api/saveSellerProductToDb";
 import { AuthContext } from "../../contexts/AuthProvider";

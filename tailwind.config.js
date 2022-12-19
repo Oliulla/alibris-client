@@ -7,7 +7,7 @@ module.exports = {
     themes: [
       {
         doctortheme:{
-          primary: '#3E5C6D',
+          primary: '#3E5C7F',
           secondary: '#19D3AE',
           accent: "#3A4256",
           neutral: "#3D4451",
