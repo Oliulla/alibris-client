@@ -36,8 +36,8 @@ export const router = createBrowserRouter([
                 element: <Blogs />
             },
             {
-                path: '/category/:id',
-                loader: ({params}) => fetch(`https://alibris-server.vercel.app/category/${params.id}`),
+                path: '/category/:categoryName',
+                loader: ({params}) => fetch(`http://localhost:5000/category/${params?.categoryName}`),
                 element: <PrivateRoute><CategoryBooks /></PrivateRoute>
             },
             {

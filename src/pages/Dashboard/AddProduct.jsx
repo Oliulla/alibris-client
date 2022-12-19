@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { saveSellerProductToDb } from "../../api/saveSellerProductToDb";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -20,6 +21,7 @@ const AddProduct = () => {
 
   const handleAddProduct = (data) => {
     // console.log(data);
+    // console.log(data.categoryName);
 
     // upload image to imgbb
     const image = data.bookImg[0];
@@ -36,36 +38,42 @@ const AddProduct = () => {
         if (imgData.success) {
           // products for db
           const sellerProduct = {
-            categoryName: data?.categoryName.toLowerCase(),
-            products: [
-              {
-                email: user?.email,
-                bookName: data?.bookName,
-                location: data?.location,
-                originalPrice: data?.originalPrice,
-                resalePrice: data?.resalePrice,
-                bookCondition: data?.bookCondition,
-                yearOfUse: data?.yearOfUse,
-                sellerPhone: data?.phoneNumber,
-                description: data?.description,
-                postDate: postDate,
-                sellerName: user?.displayName,
-                bookImgUrl: imgData.data.url,
-                isAvailable: true,
-              },
-            ],
+            categoryName: data?.categoryName,
+            email: user?.email,
+            bookName: data?.bookName,
+            location: data?.location,
+            originalPrice: data?.originalPrice,
+            resalePrice: data?.resalePrice,
+            bookCondition: data?.bookCondition,
+            yearOfUse: data?.yearOfUse,
+            sellerPhone: data?.phoneNumber,
+            description: data?.description,
+            postDate: postDate,
+            sellerName: user?.displayName,
+            bookImgUrl: imgData.data.url,
+            isAvailable: true,
           };
 
           // console.log(sellerProduct)
 
           // save seller product to db under category
           saveSellerProductToDb(sellerProduct);
-          navigate("/dashboard/my-products");
+          // .then((res) => res.json())
+          // .then((data) => {
+          //   console.log(data);
+          //   if (data.status) {
+          //     toast.success(data.message);
+          //   }
+          // })
+          // .catch((error) => {
+          //   console.log(error);
+          // });
+          // navigate("/dashboard/my-products");
         }
       });
 
     // // save seller products to db
-    // fetch("https://alibris-server.vercel.app/sellerProduct", {
+    // fetch("http://localhost:5000/sellerProduct", {
     //   method: "PUT",
     //   headers: {
     //     "content-type": "application/json",
@@ -97,7 +105,7 @@ const AddProduct = () => {
       >
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Book Name</span>
+            <span className="label-text text-xl mt-1">Book Name</span>
           </label>
           <input
             type="text"
@@ -106,9 +114,10 @@ const AddProduct = () => {
             className="input input-bordered w-full max-w-xs input-info"
           />
         </div>
+
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Resale Price</span>
+            <span className="label-text text-xl mt-1">Resale Price</span>
           </label>
           <input
             type="number"
@@ -120,7 +129,7 @@ const AddProduct = () => {
         </div>
         <div>
           <label className="label">
-            <span className="label-text">Book Condition</span>
+            <span className="label-text text-xl mt-1">Book Condition</span>
           </label>
           <div className="flex items-center gap-1">
             <small>Excellent</small>
@@ -129,7 +138,6 @@ const AddProduct = () => {
               {...register("bookCondition")}
               value="excellent"
               className="radio w-4 h-4 radio-info"
-              checked
             />
             <small className="ml-2">Good</small>
             <input
@@ -149,7 +157,7 @@ const AddProduct = () => {
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Phone Number</span>
+            <span className="label-text text-xl mt-1">Phone Number</span>
           </label>
           <input
             type="phone number"
@@ -160,7 +168,7 @@ const AddProduct = () => {
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Location</span>
+            <span className="label-text text-xl mt-1">Location</span>
           </label>
           <input
             type="text"
@@ -171,18 +179,23 @@ const AddProduct = () => {
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Book Category</span>
+            <span className="label-text text-xl mt-1">Book Category</span>
           </label>
-          <input
-            type="text"
-            {...register("categoryName", { required: true })}
-            placeholder="product Category"
-            className="input input-bordered w-full max-w-xs input-info"
-          />
+          <span className="border border-[#3ABFF8] w-full py-[.7rem] rounded-md">
+            <select
+              {...register("categoryName")}
+              className="w-full outline-none h-full"
+            >
+              <option value="Science Fiction">Science Fiction</option>
+              <option value="Novel">Novel</option>
+              <option value="Poetry">Poetry</option>
+              <option value="Mathematics">Mathematics</option>
+            </select>
+          </span>
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Book Description</span>
+            <span className="label-text text-xl mt-1">Book Description</span>
           </label>
           <textarea
             {...register("description")}
@@ -192,7 +205,7 @@ const AddProduct = () => {
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Original Price</span>
+            <span className="label-text text-xl mt-1">Original Price</span>
           </label>
           <input
             type="number"
@@ -204,7 +217,7 @@ const AddProduct = () => {
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Years of Use</span>
+            <span className="label-text text-xl mt-1">Years of Use</span>
           </label>
           <input
             type="number"
@@ -216,7 +229,7 @@ const AddProduct = () => {
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Years of Purchase</span>
+            <span className="label-text text-xl mt-1">Years of Purchase</span>
           </label>
           <input
             type="date"
@@ -227,7 +240,7 @@ const AddProduct = () => {
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Book Image</span>
+            <span className="label-text text-xl mt-1">Book Image</span>
           </label>
           <input
             type="file"
@@ -239,7 +252,7 @@ const AddProduct = () => {
         <input
           type="submit"
           value="Submit"
-          className="btn btn-primary w-full max-w-xs mt-4"
+          className="btn btn-primary w-full max-w-xs mt-8"
         />
       </form>
     </div>

@@ -8,11 +8,25 @@ import useBuyer from "../../hooks/useBuyer";
 
 const DashboardMenu = () => {
   const { user } = useContext(AuthContext);
+  console.log("from dashboard", user)
   // const [userRole] = useUserRole(user?.email);
-  //   console.log(userRole)
-  const [isAdmin] = useAdmin(user?.email);
-  const [isSeller] = useSeller(user?.email);
-  const [isBuyer] = useBuyer(user?.email);
+    // console.log(userRole)
+  const [isAdmin, isAdminLoading] = useAdmin(user?.email);
+  const [isSeller, isSellerLoading] = useSeller(user?.email);
+  const [isBuyer, isBuyerLoading] = useBuyer(user?.email);
+  console.log("inside dashbord use hook", isAdmin, isSeller, isBuyer);
+
+  if(isSellerLoading) {
+    return;
+  }
+
+  if(isBuyerLoading) {
+    return;
+  }
+
+  if(isAdminLoading) {
+    return;
+  }
 
 
   //   const {
@@ -24,7 +38,7 @@ const DashboardMenu = () => {
   //     queryFn: async () => {
   //       try {
   //         const data = await axios.get(
-  //           `https://alibris-server.vercel.app/user/${user?.email}`
+  //           `http://localhost:5000/user/${user?.email}`
   //         );
   //         if (data.status === 200) {
   //           return data?.data?.data;

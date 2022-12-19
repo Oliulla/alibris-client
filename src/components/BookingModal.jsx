@@ -29,7 +29,7 @@ const BookingModal = ({ givenModalInfo, setGivenModalInfo }) => {
     };
 
     // send booking to db
-    axios.post('https://alibris-server.vercel.app/bookings', booking)
+    axios.post('http://localhost:5000/bookings', booking)
     .then(data => {
       console.log(data.data.status);
       if(data.data.status) {

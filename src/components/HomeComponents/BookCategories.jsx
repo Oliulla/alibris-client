@@ -10,10 +10,10 @@ const BookCategories = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://alibris-server.vercel.app/categories")
-      .then((productData) => {
-        // console.log(productData.data.data);
-        setCategories(productData.data.data);
+      .get("http://localhost:5000/categories")
+      .then((productCategories) => {
+        // console.log(productCategories.data.data);
+        setCategories(productCategories.data.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -36,7 +36,7 @@ const BookCategories = () => {
             {categories.map((category) => {
               return (
                 <Link
-                  to={`/category/${category._id}`}
+                  to={`/category/${category.categoryName}`}
                   key={category._id}
                   className="w-auto font-semibold pr-4 md:px-6 lg:px-0 uppercase hover:text-accent text-blue-700 underline"
                 >

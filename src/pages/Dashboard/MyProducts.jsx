@@ -5,10 +5,12 @@ import { useContext } from "react";
 import Loading from "../../components/Loading";
 import { AuthContext } from "../../contexts/AuthProvider";
 import toast from "react-hot-toast";
+// import useRefetch from "../../hooks/useRefetch";
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
   // console.log(user);
+  // const [isProductLoading, setIsProductLoading] = useRefetch();
 
   let {
     data: myProducts = [],
@@ -19,11 +21,12 @@ const MyProducts = () => {
     queryKey: ["myproducts", user?.email],
     queryFn: async () => {
       const data = await axios.get(
-        `https://alibris-server.vercel.app/myproducts?email=${user?.email}`
+        `http://localhost:5000/myproducts?email=${user?.email}`
       );
       var productsArr = data.data.data;
       var products = Array.prototype.concat.apply([], productsArr);
       // console.log(products);
+      // setIsProductLoading(!isProductLoading)
       return products;
     },
   });
@@ -38,7 +41,7 @@ const MyProducts = () => {
 
   // advertise items save to db
   const handleAdvertise = (advertiseProduct) => {
-    fetch(`https://alibris-server.vercel.app/advertiseProducts`, {
+    fetch(`http://localhost:5000/advertiseProducts`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -58,7 +61,7 @@ const MyProducts = () => {
   const handleProductDelete = (deletedProduct) => {
     // console.log(myProducts, deletedProduct);
     // console.log(deletedProduct);
-    // fetch(`https://alibris-server.vercel.app/myproducts/${_id}`, {
+    // fetch(`http://localhost:5000/myproducts/${_id}`, {
     //   method: 'PUT',
     //   body: JSON.stringify(deletedProduct)
     // })

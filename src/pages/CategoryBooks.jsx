@@ -6,6 +6,7 @@ import { AuthContext } from "../contexts/AuthProvider";
 
 const CategoryBooks = () => {
   const { data } = useLoaderData();
+  console.log(data);
   const { user } = useContext(AuthContext);
   const { email, displayName } = user;
   const [givenModalInfo, setGivenModalInfo] = useState({
@@ -16,7 +17,10 @@ const CategoryBooks = () => {
     imgUrl: "",
   });
 
-  console.log(data)
+  // get single products to see products category name.
+  const productCategoryName = data.find(book => book.categoryName);
+  // console.log(productCategoryName);
+
 
   const handleBooking = (bookName, resalePrice, imgURL) => {
     // console.log(bookName, resalePrice)
@@ -32,11 +36,11 @@ const CategoryBooks = () => {
   return (
     <div className="mt-10 mx-auto px-2 lg:px-8">
       <h2 className="text-3xl font-semibold mb-4">
-        All books for <span className="uppercase text-accent">{data?.categoryName}</span>
+        All books for <span className="uppercase text-accent">{productCategoryName?.categoryName}</span>
       </h2>
       <div className="grid grid-cols-1 gap-6">
-        {data?.products?.map((book, idx) => (
-          <Books key={idx} book={book} handleBooking={handleBooking} />
+        {data?.map((book) => (
+          <Books key={book._id} book={book} handleBooking={handleBooking} />
         ))}
       </div>
       {

@@ -58,7 +58,7 @@ const Register = () => {
   // // save user to db
   // const saveUserToDb = async(name, email, role) => {
   //   const user = {name, email, role};
-  //   const data = await axios.put('https://alibris-server.vercel.app/users', user);
+  //   const data = await axios.put('http://localhost:5000/users', user);
   //   return data;
   // }
 

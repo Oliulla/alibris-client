@@ -9,12 +9,14 @@ import useBuyer from "../hooks/useBuyer";
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
+  // console.log(user);
   const [isBuyer, isBuyerLoading] = useBuyer(user?.email)
   // const [userRole, isLoading] = useUserRole(user?.email)
-  // console.log(userRole);
+  // console.log(isBuyerLoading);
 
+  console.log(loading, isBuyerLoading);
 
-  if(loading || isBuyerLoading) {
+  if((loading || isBuyerLoading)) {
     return <Loading />
   }
 
