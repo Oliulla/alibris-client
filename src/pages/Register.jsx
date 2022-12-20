@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
@@ -7,18 +7,19 @@ import toast from "react-hot-toast";
 import GoogleLogin from "../components/GoogleLogin";
 // import axios from "axios";
 import { saveUserToDb } from "../api/saveUserToDb";
+import axios from "axios";
+import useToken from "../hooks/useToken";
 
 const Register = () => {
-  const { createUser, updateUser } = useContext(AuthContext);
+  const {register, formState: { errors }, handleSubmit} = useForm();
+  const { createUser, updateUser, userSaved, setUserSaved } = useContext(AuthContext);
+  // const [signUpError, setSignUPError] = useState('');
+  // const [createdUserEmail, setCreatedUserEmail] = useState("");
+  // const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
 
   const handleRegister = (data) => {
     // console.log(data);
@@ -27,23 +28,24 @@ const Register = () => {
         // console.log(result.user);
         toast.success("successfully registered");
         // console.log(result.user);
-        
+
         const userInfo = {
           displayName: data.name,
         };
-        
+
         // update user name
         updateUser(userInfo)
-        .then(() => {
-          saveUserToDb(data?.name, data?.email, data?.role)
-          .then((data) => {
-            console.log(data)
-              navigate(from, { replace: true });
-              // console.log(data)
-            })
-            .catch(error => {
-              console.log(error);
-            })
+          .then(() => {
+            saveUserToDb(data?.name, data?.email, data?.role);
+            setUserSaved(!userSaved)
+            return navigate(from, { replace: true });
+            // .then((data) => {
+            //   console.log(data)
+            //     // console.log(data)
+            //   })
+            //   .catch(error => {
+            //     console.log(error);
+            //   })
           })
           .catch((error) => {
             console.log(error?.message);
@@ -55,12 +57,17 @@ const Register = () => {
       });
   };
 
-  // // save user to db
-  // const saveUserToDb = async(name, email, role) => {
-  //   const user = {name, email, role};
-  //   const data = await axios.put('http://localhost:5000/users', user);
-  //   return data;
-  // }
+  // save user to db
+  const saveUserToDb = async (name, email, role) => {
+    try {
+      const user = { name, email, role };
+      const data = await axios.put("http://localhost:5000/users", user);
+      // setCreatedUserEmail(email);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="hero my-10">

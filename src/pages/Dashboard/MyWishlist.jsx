@@ -32,7 +32,7 @@ const MyWishlist = () => {
           <>
             <div className="mx-auto px-20 my-10">
               <h2 className="text-3xl text-accent font-semibold mb-2">
-                My Orders
+                My Wishlists
               </h2>
               <div className="overflow-x-auto">
                 <table className="table w-full">

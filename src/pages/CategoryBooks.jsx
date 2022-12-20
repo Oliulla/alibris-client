@@ -1,10 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import BookingModal from "../components/BookingModal";
 import Books from "../components/Books";
+import Loading from "../components/Loading";
 import { AuthContext } from "../contexts/AuthProvider";
 
 const CategoryBooks = () => {
+  const [loading, setLoading] = useState(true);
   const { data } = useLoaderData();
   console.log(data);
   const { user } = useContext(AuthContext);
@@ -16,6 +18,26 @@ const CategoryBooks = () => {
     resalePrice: "",
     imgUrl: "",
   });
+
+      
+    useEffect(() => {
+      // Loading function to load data or 
+      // fake it using setTimeout;
+      const loadData = async () => {
+  
+        // Wait for two second
+        await new Promise((r) => setTimeout(r, 2000));
+  
+        // Toggle loading state
+        setLoading((loading) => !loading);
+      };
+        
+      loadData();
+    }, [])
+
+    if(loading) {
+      <Loading />
+    }
 
   // get single products to see products category name.
   const productCategoryName = data.find(book => book.categoryName);
