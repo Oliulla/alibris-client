@@ -11,7 +11,7 @@ const AdvertiseItems = () => {
     queryKey: ["advertiseProducts"],
     queryFn: async () => {
       try {
-        const data = await axios.get("http://localhost:5000/advertiseProducts");
+        const data = await axios.get("https://alibris-server.vercel.app/advertiseProducts");
         // console.log(data)
         return data.data;
       } catch (error) {

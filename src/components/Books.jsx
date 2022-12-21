@@ -27,7 +27,7 @@ const Books = ({ book, handleBooking }) => {
       imgUrl: imgURL,
     }
 
-    axios.post("http://localhost:5000/mywishlist", wishlistProduct)
+    axios.post("https://alibris-server.vercel.app/mywishlist", wishlistProduct)
     .then(data => {
       console.log(data);
       toast.success(`Successfully ${bookName} added in wishlist!!!`)

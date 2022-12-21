@@ -6,7 +6,7 @@ const PermissionModal = ({ productId, refetch }) => {
   // delete specific product
   const handleProductDelete = (deletedProductId) => {
 
-    fetch(`http://localhost:5000/myproducts/${deletedProductId}`, {
+    fetch(`https://alibris-server.vercel.app/myproducts/${deletedProductId}`, {
       method: 'Delete',
     })
     .then(res => res.json())

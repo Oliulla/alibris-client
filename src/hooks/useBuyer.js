@@ -8,7 +8,7 @@ const useBuyer = (email, userSaved) => {
   useEffect(() => {
     if (email) {
       // setIsBuyerLoading(true);
-      fetch(`http://localhost:5000/users/buyer/${email}`)
+      fetch(`https://alibris-server.vercel.app/users/buyer/${email}`)
         .then((res) => res.json())
         .then((data) => {
             console.log(data);

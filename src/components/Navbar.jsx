@@ -6,26 +6,68 @@ import toast from "react-hot-toast";
 import useAdmin from "../hooks/useAdmin";
 import useSeller from "../hooks/useSeller";
 import useBuyer from "../hooks/useBuyer";
+import Loading from "./Loading";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import ButtonLoading from "./ButtonLoading";
 
 const Navbar = () => {
   const { user, logOut, userSaved } = useContext(AuthContext);
   //   console.log(user);
-  const [isAdmin, isAdminLoading] = useAdmin(user?.email);
-  const [isSeller, isSellerLoading] = useSeller(user?.email, userSaved);
-  const [isBuyer, isBuyerLoading] = useBuyer(user?.email, user?.displayName, userSaved);
+  // const [isAdmin, isAdminLoading] = useAdmin(user?.email);
+  // const [isSeller, isSellerLoading] = useSeller(user?.email, userSaved);
+  // const [isBuyer, isBuyerLoading] = useBuyer(user?.email, user?.displayName, userSaved);
   const navigate = useNavigate();
 
+  const {
+    data: userRole = "",
+    isLoading,
+    error,
+    refetch
+  } = useQuery({
+    queryKey: ["user", user?.email],
+    queryFn: async () => {
+      try {
+        const data = await axios.get(
+          `https://alibris-server.vercel.app/user/${user?.email}`
+        );
+        if (data.status === 200) {
+          console.log("user from navbar", data?.data?.data)
+          return data?.data?.data;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
 
+
+  // if(isLoading) {
+  //   return <Loading />
+  // }
+  if(error) {
+    console.log(error);
+  }
+  
 
   const handleDefaultRoute = () => {
-    // console.log(isAdmin, isSeller, isBuyer)
-    if(isAdmin) {
+    
+    if(isLoading) {
+      refetch();
+    }
+
+    // if(user) {
+    //   navigate("/dashboard")
+    // }
+
+
+    if(userRole === "admin") {
       return navigate("/dashboard/all-sellers");
     }
-    if(isBuyer) {
+    if(userRole === "buyer") {
       return navigate('/dashboard/my-orders') 
     }
-    if(isSeller) {
+    if(userRole === "seller") {
       return navigate("/dashboard/my-products") 
     }
   };
@@ -65,7 +107,7 @@ const Navbar = () => {
         ) : (
           <>
             {/* <div className="dropdown dropdown-end pr-4"> */}
-            <button
+             <button
               // to="/dashboard"
               onClick={() => handleDefaultRoute()}
               className="btn btn-outline text-base-100 mr-4 btn-sm border-secondary text-[0.8rem]"

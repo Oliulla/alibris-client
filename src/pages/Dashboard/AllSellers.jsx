@@ -18,7 +18,7 @@ const AllSellers = () => {
     queryKey: ["sellers"],
     queryFn: async() => {
       try {
-        const data = await axios.get(`http://localhost:5000/sellers`);
+        const data = await axios.get(`https://alibris-server.vercel.app/sellers`);
         // console.log(data.data);
         return data?.data;
       } catch (error) {
@@ -29,7 +29,7 @@ const AllSellers = () => {
 
   // console.log(users);
   const handleSellerDelete = sellerId => {
-    axios.delete(`http://localhost:5000/sellers/${sellerId}`)
+    axios.delete(`https://alibris-server.vercel.app/sellers/${sellerId}`)
     .then(data => {
       console.log(data);
       refetch()
@@ -42,7 +42,7 @@ const AllSellers = () => {
 
   // verify sellers
   const verifySeller = (userEmail) => {
-    axios.put(`http://localhost:5000/sellerVerified/${userEmail}`)
+    axios.put(`https://alibris-server.vercel.app/sellerVerified/${userEmail}`)
     .then(data => {
       console.log(data);
       toast.success("Successfully verified the seller!!!");

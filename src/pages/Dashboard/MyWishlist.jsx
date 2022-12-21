@@ -13,7 +13,7 @@ const MyWishlist = () => {
 
     useEffect(() => {
         setIsLoading(true)
-        axios.get(`http://localhost:5000/myWishlists/${user?.email}`)
+        axios.get(`https://alibris-server.vercel.app/myWishlists/${user?.email}`)
         .then(data => {
             setWishlists(data?.data?.data);
             setIsLoading(false);
