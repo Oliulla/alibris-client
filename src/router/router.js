@@ -16,6 +16,7 @@ import Home from '../pages/Home/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import AdminRoute from '../Routes/AdminRoute';
+import CommonRoute from '../Routes/CommonRoute';
 import PrivateRoute from '../Routes/PrivateRoute';
 import SellerRoute from '../Routes/SellerRoute';
 
@@ -54,11 +55,14 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout />,
+        element: <CommonRoute><DashboardLayout /></CommonRoute>,
+        // element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: '/dashboard',
-                element: <Welcome />
+                element: <CommonRoute><Welcome /></CommonRoute>,
+                // element: <PrivateRoute><Welcome /></PrivateRoute>,
             },
             {
                 path: '/dashboard/my-orders',

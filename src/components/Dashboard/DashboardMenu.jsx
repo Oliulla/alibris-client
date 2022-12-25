@@ -5,9 +5,9 @@ import useAdmin from "../../hooks/useAdmin";
 // import useUserRole from "../../hooks/useUserRole";
 import useSeller from "../../hooks/useSeller";
 import useBuyer from "../../hooks/useBuyer";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
-import Loading from "../Loading";
+// import axios from "axios";
+// import { useQuery } from "@tanstack/react-query";
+// import Loading from "../Loading";
 
 const DashboardMenu = () => {
   const { user, userSaved } = useContext(AuthContext);

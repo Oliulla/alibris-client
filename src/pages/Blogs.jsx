@@ -1,6 +1,7 @@
 import React from "react";
 
 const Blogs = () => {
+  
   return (
     <div className="my-10 mx-auto px-4 md:px-8 lg:px-10">
       <h2 className="text-3xl font-semibold border-b border-info mb-2">

@@ -4,7 +4,7 @@ import { AuthContext } from "../contexts/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
 // import useUserRole from "../hooks/useUserRole";
 import Loading from "../components/Loading";
-import useBuyer from "../hooks/useBuyer";
+// import useBuyer from "../hooks/useBuyer";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
