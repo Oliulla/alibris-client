@@ -26,7 +26,7 @@ const PrivateRoute = ({ children }) => {
     queryFn: async () => {
       try {
         const data = await axios.get(
-          `https://alibris-server.vercel.app/user/${user?.email}`
+          `http://localhost:5000/user/${user?.email}`
         );
         if (data.status === 200) {
           if(data?.data?.data === 'buyer') {

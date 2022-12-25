@@ -10,7 +10,7 @@ const BookCategories = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://alibris-server.vercel.app/categories")
+      .get("http://localhost:5000/categories")
       .then((productCategories) => {
         // console.log(productCategories.data.data);
         setCategories(productCategories.data.data);

@@ -7,7 +7,7 @@ const useGetUser = () => {
 
     useEffect(() => {
         setUserLoading(true)
-        axios.get('https://alibris-server.vercel.app/users')
+        axios.get('http://localhost:5000/users')
         .then(data => {
             setUsers(data.data.data)
             setUserLoading(false);

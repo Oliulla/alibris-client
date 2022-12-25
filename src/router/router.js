@@ -1,4 +1,5 @@
 import {createBrowserRouter} from 'react-router-dom';
+import Welcome from '../components/Dashboard/Welcome';
 import DashboardLayout from '../layouts/DashboardLayout';
 import Root from '../layouts/Root';
 import Blogs from '../pages/Blogs';
@@ -38,7 +39,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/category/:categoryName',
-                loader: ({params}) => fetch(`https://alibris-server.vercel.app/category/${params?.categoryName}`),
+                loader: ({params}) => fetch(`http://localhost:5000/category/${params?.categoryName}`),
                 element: <PrivateRoute><CategoryBooks /></PrivateRoute>
             },
             {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
         path: '/dashboard',
         element: <DashboardLayout />,
         children: [
+            {
+                path: '/dashboard',
+                element: <Welcome />
+            },
             {
                 path: '/dashboard/my-orders',
                 element: <PrivateRoute><MyOrders /></PrivateRoute>

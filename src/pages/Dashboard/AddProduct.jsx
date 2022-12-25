@@ -72,7 +72,7 @@ const AddProduct = () => {
       });
 
     // // save seller products to db
-    // fetch("https://alibris-server.vercel.app/sellerProduct", {
+    // fetch("http://localhost:5000/sellerProduct", {
     //   method: "PUT",
     //   headers: {
     //     "content-type": "application/json",

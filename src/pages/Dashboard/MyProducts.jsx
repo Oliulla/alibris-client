@@ -22,7 +22,7 @@ const MyProducts = () => {
     queryKey: ["myproducts", user?.email],
     queryFn: async () => {
       const data = await axios.get(
-        `https://alibris-server.vercel.app/myproducts?email=${user?.email}`
+        `http://localhost:5000/myproducts?email=${user?.email}`
       );
       // var productsArr = data.data.data;
       // var products = Array.prototype.concat.apply([], productsArr);
@@ -43,7 +43,7 @@ const MyProducts = () => {
 
   // advertise items save to db
   const handleAdvertise = (advertiseProduct) => {
-    fetch(`https://alibris-server.vercel.app/advertiseProducts`, {
+    fetch(`http://localhost:5000/advertiseProducts`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

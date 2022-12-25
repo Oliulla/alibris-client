@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useAdmin from "../../hooks/useAdmin";
 // import useUserRole from "../../hooks/useUserRole";
@@ -18,6 +18,7 @@ const DashboardMenu = () => {
   const [isSeller, isSellerLoading] = useSeller(user?.email, userSaved);
   const [isBuyer, isBuyerLoading] = useBuyer(user?.email, userSaved);
   // console.log("inside dashbord use hook", isAdmin, isSeller, isBuyer);
+  const navigate = useNavigate();
 
   // if (isSellerLoading) {
   //   return <Loading />;
@@ -41,7 +42,7 @@ const DashboardMenu = () => {
     //   queryFn: async () => {
     //     try {
     //       const data = await axios.get(
-    //         `https://alibris-server.vercel.app/user/${user?.email}`
+    //         `http://localhost:5000/user/${user?.email}`
     //       );
     //       if (data.status === 200) {
     //         console.log("check data", data.data.data);
@@ -71,6 +72,22 @@ const DashboardMenu = () => {
     // const isSeller = userRole === 'seller' ? true : false;
     // const isAdmin = userRole === 'admin' ? true : false;
     // console.log(userRole)
+
+    // useEffect(() => {
+    //   if(isAdmin) {
+    //     return navigate("/dashboard/all-sellers");
+    //   }
+    //   if(isSeller) {
+    //     return navigate("/dashboard/add-products");
+    //   }
+    //   if(isBuyer) {
+    //     return navigate("/dashboard/my-orders");
+    //   }
+    
+      
+    // }, [isAdmin, isBuyer, isSeller, navigate])
+    
+
 
   return (
     <div className="min-h-screen relative bg-black">

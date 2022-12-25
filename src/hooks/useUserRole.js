@@ -7,7 +7,7 @@ const useUserRole = (email) => {
 
     useEffect(() => {
         if(email) {
-            fetch(`https://alibris-server.vercel.app/user/${email}`)
+            fetch(`http://localhost:5000/user/${email}`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data);
