@@ -10,13 +10,16 @@ import useBuyer from "../../hooks/useBuyer";
 // import Loading from "../Loading";
 
 const DashboardMenu = () => {
-  const { user, userSaved } = useContext(AuthContext);
+  // const { user, userSaved } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   // console.log("from dashboard", user);
   // const [userRole] = useUserRole(user?.email);
   // console.log(userRole)
   const [isAdmin, isAdminLoading] = useAdmin(user?.email);
-  const [isSeller, isSellerLoading] = useSeller(user?.email, userSaved);
-  const [isBuyer, isBuyerLoading] = useBuyer(user?.email, userSaved);
+  const [isSeller, isSellerLoading] = useSeller(user?.email);
+  // const [isSeller, isSellerLoading] = useSeller(user?.email, userSaved);
+  const [isBuyer, isBuyerLoading] = useBuyer(user?.email);
+  // const [isBuyer, isBuyerLoading] = useBuyer(user?.email, userSaved);
   // console.log("inside dashbord use hook", isAdmin, isSeller, isBuyer);
   const navigate = useNavigate();
 

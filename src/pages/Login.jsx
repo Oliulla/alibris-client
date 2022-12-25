@@ -5,12 +5,20 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import toast from "react-hot-toast";
 import GoogleLogin from "../components/GoogleLogin";
+import useToken from "../hooks/useToken";
+import { useState } from "react";
 
 const Login = () => {
   const { userLogin } = useContext(AuthContext);
+  const [loginUserEmail, setLoginuserEmail] = useState('');
+  const [token] = useToken(loginUserEmail);
   const navigate = useNavigate();
   const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+
+    if(token) {
+      navigate(from, {replace: true});
+    }
 
   const {
     register,
@@ -22,8 +30,10 @@ const Login = () => {
     // login user
     userLogin(data?.email, data?.password)
       .then((result) => {
+        console.log(result.user)
+        setLoginuserEmail(data?.email);
         toast.success("successfully logged in");
-        navigate(from, {replace: true})
+        // navigate(from, {replace: true})
       })
       .catch((error) => {
         toast.error(error?.message);

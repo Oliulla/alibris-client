@@ -6,19 +6,24 @@ import { AuthContext } from "../contexts/AuthProvider";
 import toast from "react-hot-toast";
 import GoogleLogin from "../components/GoogleLogin";
 // import axios from "axios";
-import { saveUserToDb } from "../api/saveUserToDb";
+// import { saveUserToDb } from "../api/saveUserToDb";
 import axios from "axios";
 import useToken from "../hooks/useToken";
 
 const Register = () => {
   const {register, formState: { errors }, handleSubmit} = useForm();
-  const { createUser, updateUser, userSaved, setUserSaved } = useContext(AuthContext);
+  const { createUser, updateUser } = useContext(AuthContext);
   // const [signUpError, setSignUPError] = useState('');
-  // const [createdUserEmail, setCreatedUserEmail] = useState("");
-  // const [token] = useToken(createdUserEmail);
+  const [createUserEmail, setCreateUserEmail] = useState("");
+  const [token] = useToken(createUserEmail);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  if(token){
+    navigate(from, { replace: true });
+}
+
 
 
   const handleRegister = (data) => {
@@ -37,8 +42,8 @@ const Register = () => {
         updateUser(userInfo)
           .then(() => {
             saveUserToDb(data?.name, data?.email, data?.role);
-            setUserSaved(!userSaved)
-            return navigate(from, { replace: true });
+            // setUserSaved(!userSaved)
+            // return navigate(from, { replace: true });
             // .then((data) => {
             //   console.log(data)
             //     // console.log(data)
@@ -62,7 +67,7 @@ const Register = () => {
     try {
       const user = { name, email, role };
       const data = await axios.put("http://localhost:5000/users", user);
-      // setCreatedUserEmail(email);
+      setCreateUserEmail(email)
       console.log(data);
     } catch (error) {
       console.log(error);

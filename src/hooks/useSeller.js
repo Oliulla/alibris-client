@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useSeller = (email, userSaved) => {
+const useSeller = (email) => {
   const [isSeller, setIsSeller] = useState(false);
   const [isSellerLoading, setIsSellerLoading] = useState(true);
   // console.log(email)
@@ -14,7 +14,7 @@ const useSeller = (email, userSaved) => {
           setIsSellerLoading(false);
         });
     }
-  }, [email, userSaved]);
+  }, [email]);
   return [isSeller, isSellerLoading];
 };
 
