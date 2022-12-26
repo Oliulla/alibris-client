@@ -11,7 +11,11 @@ import axios from "axios";
 import useToken from "../hooks/useToken";
 
 const Register = () => {
-  const {register, formState: { errors }, handleSubmit} = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const { createUser, updateUser } = useContext(AuthContext);
   // const [signUpError, setSignUPError] = useState('');
   const [createUserEmail, setCreateUserEmail] = useState("");
@@ -20,11 +24,9 @@ const Register = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  if(token){
+  if (token) {
     navigate(from, { replace: true });
-}
-
-
+  }
 
   const handleRegister = (data) => {
     // console.log(data);
@@ -67,7 +69,7 @@ const Register = () => {
     try {
       const user = { name, email, role };
       const data = await axios.put("http://localhost:5000/users", user);
-      setCreateUserEmail(email)
+      setCreateUserEmail(email);
       console.log(data);
     } catch (error) {
       console.log(error);

@@ -22,13 +22,14 @@ const MyProducts = () => {
     queryKey: ["myproducts", user?.email],
     queryFn: async () => {
       const data = await axios.get(
-        `http://localhost:5000/myproducts?email=${user?.email}`
+        `http://localhost:5000/myproducts?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          }
+        }
       );
-      // var productsArr = data.data.data;
-      // var products = Array.prototype.concat.apply([], productsArr);
-      // // console.log(products);
-      // // setIsProductLoading(!isProductLoading)
-      // console.log(data.data.data);
+      
       return data?.data?.data;
     },
   });

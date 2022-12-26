@@ -8,7 +8,7 @@ import { AuthContext } from "../contexts/AuthProvider";
 const CategoryBooks = () => {
   const [loading, setLoading] = useState(true);
   const { data } = useLoaderData();
-  console.log(data);
+  // console.log(data);
   const { user } = useContext(AuthContext);
   const { email, displayName } = user;
   const [givenModalInfo, setGivenModalInfo] = useState({

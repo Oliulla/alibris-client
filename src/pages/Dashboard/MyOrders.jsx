@@ -68,7 +68,7 @@ const MyOrders = () => {
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
+          }
         }
       )
       .then((res) => {
