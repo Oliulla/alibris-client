@@ -2,6 +2,7 @@ import {createBrowserRouter} from 'react-router-dom';
 import Welcome from '../components/Dashboard/Welcome';
 import DashboardLayout from '../layouts/DashboardLayout';
 import Root from '../layouts/Root';
+import SearchLayout from '../layouts/SearchLayout';
 import Blogs from '../pages/Blogs';
 import CategoryBooks from '../pages/CategoryBooks';
 import AddProduct from '../pages/Dashboard/AddProduct';
@@ -15,6 +16,7 @@ import ErrorPage from '../pages/ErrorPage';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import SearchBooks from '../pages/SearchBooks/SearchBooks';
 import AdminRoute from '../Routes/AdminRoute';
 import CommonRoute from '../Routes/CommonRoute';
 import PrivateRoute from '../Routes/PrivateRoute';
@@ -92,6 +94,17 @@ export const router = createBrowserRouter([
                 path: '/dashboard/reported-items',
                 element: <AdminRoute><ReportedItems /></AdminRoute>
             },
+        ]
+    },
+    {
+        path: '/products/search',
+        element: <SearchLayout />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: '/products/search',
+                element: <SearchBooks />
+            }
         ]
     }
 ])

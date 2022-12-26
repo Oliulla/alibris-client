@@ -6,7 +6,7 @@ import { HiCheckCircle } from "react-icons/hi";
 import { AuthContext } from "../contexts/AuthProvider";
 
 const Books = ({ book, handleBooking }) => {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const {
     bookName,
     location,
@@ -25,17 +25,18 @@ const Books = ({ book, handleBooking }) => {
       bookName: bookName,
       resalePrice: resalePrice,
       imgUrl: imgURL,
-    }
+    };
 
-    axios.post("http://localhost:5000/mywishlist", wishlistProduct)
-    .then(data => {
-      console.log(data);
-      toast.success(`Successfully ${bookName} added in wishlist!!!`)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }
+    axios
+      .post("http://localhost:5000/mywishlist", wishlistProduct)
+      .then((data) => {
+        console.log(data);
+        toast.success(`Successfully ${bookName} added in wishlist!!!`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="card card-side bg-base-100 border-r-2 border-blue-500 shadow-2xl">
@@ -62,7 +63,15 @@ const Books = ({ book, handleBooking }) => {
             <span className="font-semibold">Posted:</span> {postDate}
           </p>
           <div className="my-2 md:my-6 flex">
-            <span className="font-semibold inline-flex">Seller:</span><p className="flex"><span className="pl-2">{sellerName}</span><span className="text-xl"><HiCheckCircle/></span></p>
+            <span className="font-semibold inline-flex">Seller:</span>
+            <p className="flex">
+              <span className="text-xl text-white px-2 rounded-sm bg-gray-900 flex justify-center items-center ml-2">
+                {sellerName}
+                <span className="text-blue-500">
+                  <HiCheckCircle />
+                </span>
+              </span>
+            </p>
           </div>
         </div>
         <div className="card-actions justify-end">

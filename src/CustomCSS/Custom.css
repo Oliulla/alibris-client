@@ -1,0 +1,19 @@
+.custom_overlay {
+  height: 400px;
+  width: 100%;
+  text-align: center;
+  padding-top: 100px;
+  color: white;
+  overflow: hidden;
+  background: #c04848; /* fallback for old browsers */
+  background: linear-gradient(rgba(109, 0, 109, 0.8), rgba(172, 43, 43, 0.8)),
+    url("https://i.ibb.co/pZ1dj9f/banner2.jpg"); /* Chrome 10-25, Safari 5.1-6 */
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* .custom_flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */

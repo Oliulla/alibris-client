@@ -21,6 +21,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState("");
   // const [userSaved, setUserSaved] = useState(false);
   // google authprovider
   const googleProvider = new GoogleAuthProvider();
@@ -76,6 +77,8 @@ const AuthProvider = ({ children }) => {
     googleLogin,
     logOut,
     loading,
+    searchText,
+    setSearchText
   };
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
