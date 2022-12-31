@@ -8,6 +8,7 @@ import CategoryBooks from '../pages/CategoryBooks';
 import AddProduct from '../pages/Dashboard/AddProduct';
 import AllBuyers from '../pages/Dashboard/AllBuyers';
 import AllSellers from '../pages/Dashboard/AllSellers';
+import BookingPage from '../pages/Dashboard/BookingPage';
 import MyOrders from '../pages/Dashboard/MyOrders';
 import MyProducts from '../pages/Dashboard/MyProducts';
 import MyWishlist from '../pages/Dashboard/MyWishlist';
@@ -93,6 +94,11 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/reported-items',
                 element: <AdminRoute><ReportedItems /></AdminRoute>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                loader: ({params}) => fetch(`http://localhost:5000/bookings/payment/${params.id}`),
+                element: <PrivateRoute><BookingPage /></PrivateRoute>
             },
         ]
     },

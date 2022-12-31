@@ -63,24 +63,21 @@ const MyOrders = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(
-        `http://localhost:5000/bookings?email=${user?.email}`,
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          }
-        }
-      )
+      .get(`http://localhost:5000/bookings?email=${user?.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
       .then((res) => {
         if (res.status === 401 || res.status === 403) {
           logOut();
         }
         setBookings(res.data.data);
-        setIsLoading(false)
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
-        setIsLoading(false)
+        setIsLoading(false);
       });
   }, [user?.email, logOut]);
 
@@ -88,7 +85,7 @@ const MyOrders = () => {
     <>
       {bookings?.length && !isLoading ? (
         <>
-          <div className="mx-auto px-20 my-10">
+          <div className="mx-auto md:px-20 md:my-8 w-full">
             <h2 className="text-3xl text-accent font-semibold mb-2">
               My Orders
             </h2>
@@ -115,12 +112,19 @@ const MyOrders = () => {
                             alt=""
                           />
                         </td>
-                        <td>{order?.title}</td>
+                        <td className="font-semibold">{order?.title}</td>
                         <td>{order?.price}tk</td>
                         <td>
-                          <button className="btn btn-primary btn-sm">
-                            Pay
-                          </button>
+                          {order.price && !order.paid && (
+                            <Link to={`/dashboard/payment/${order?._id}`}>
+                              <button className="btn btn-primary btn-sm">
+                                Pay
+                              </button>
+                            </Link>
+                          )}
+                          {order.price && order.paid && (
+                            <span className="text-blue-400 font-bold">Paid</span>
+                          )}
                         </td>
                       </tr>
                     );
@@ -132,9 +136,7 @@ const MyOrders = () => {
         </>
       ) : (
         <p className="mt-10 mb-56 text-center">
-          <span className="text-3xl">
-            You have no order. To give order
-          </span>
+          <span className="text-3xl">You have no order. To give order</span>
           <Link to="/" className="text-secondary font-semibold underline ml-2">
             Visit here
           </Link>

@@ -93,21 +93,23 @@ const DashboardMenu = () => {
 
 
   return (
-    <div className="min-h-screen relative bg-black">
-      <h2 className="text-white font-semibold text-2xl py-4 pl-4">Name: {user?.displayName ? user?.displayName : 'Anonymous'}</h2>
+    <>
+    {
+      isBuyer || isSeller || isAdmin ? <div className="min-h-screen relative">
+      {/* <h2 className="text-white font-semibold md:text-2xl md:py-4 md:pl-4">Name: {user?.displayName ? user?.displayName : 'Anonymous'}</h2> */}
       <ul
         // tabIndex={0}
-        className="menu menu-compact fixed top-36 p-2 shadow w-full bg-black h-48 text-white"
+        className="menu menu-compact fixed top-20 right-0 p-2 shadow h-44 md:h-full md:w-64 bg-black text-white"
       >
         {isBuyer && (
           <>
             <li>
-              <Link to="/dashboard/my-orders" className="justify-between">
+              <Link to="/dashboard/my-orders" className="justify-between hover:btn-accent">
                 My Orders
               </Link>
             </li>
             <li>
-              <Link to="/dashboard/my-wishlists" className="justify-between">
+              <Link to="/dashboard/my-wishlists" className="justify-between hover:btn-accent">
                 My Wishlists
               </Link>
             </li>
@@ -116,20 +118,20 @@ const DashboardMenu = () => {
         {isSeller && (
           <>
             <li>
-              <Link to="/dashboard/add-product">Add A Product</Link>
+              <Link to="/dashboard/add-product" className="hover:btn-accent" >Add A Product</Link>
             </li>
             <li>
-              <Link to="/dashboard/my-products">My Products</Link>
+              <Link to="/dashboard/my-products" className="hover:btn-accent">My Products</Link>
             </li>
           </>
         )}
         {isAdmin && (
           <>
             <li>
-              <Link to="/dashboard/all-sellers">All Sellers</Link>
+              <Link to="/dashboard/all-sellers" className="hover:btn-accent">All Sellers</Link>
             </li>
             <li>
-              <Link to="/dashboard/all-buyers">All Buyers</Link>
+              <Link to="/dashboard/all-buyers" className="hover:btn-accent">All Buyers</Link>
             </li>
             {/* <li>
               <Link to="/dashboard/reported-items">Reported Items</Link>
@@ -138,6 +140,9 @@ const DashboardMenu = () => {
         )}
       </ul>
     </div>
+    : ""
+    }
+    </>
   );
 };
 

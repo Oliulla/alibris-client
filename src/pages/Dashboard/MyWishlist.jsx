@@ -35,7 +35,7 @@ const MyWishlist = () => {
     <>
       {wishlists.length && !isLoading ? (
         <>
-          <div className="mx-auto px-20 my-10">
+          <div className="mx-auto md:px-20 md:my-8 w-full">
             <h2 className="text-3xl text-accent font-semibold mb-2">
               My Wishlists
             </h2>
@@ -62,12 +62,21 @@ const MyWishlist = () => {
                             alt=""
                           />
                         </td>
-                        <td>{wishlist?.bookName}</td>
+                        <td className="font-semibold">{wishlist?.bookName}</td>
                         <td>{wishlist?.resalePrice}tk</td>
                         <td>
-                          <button className="btn btn-primary btn-sm">
-                            Pay
-                          </button>
+                          {/* {wishlist.resalePrice && !wishlist.paid && (
+                            <Link to={`/dashboard/payment/${wishlist?._id}`}>
+                              <button className="btn btn-primary btn-sm">
+                                Pay
+                              </button>
+                            </Link>
+                          )}
+                          {wishlist.resalePrice && wishlist.paid && (
+                            <span className="text-blue-400 font-bold">
+                              Paid
+                            </span>
+                          )} */}
                         </td>
                       </tr>
                     );

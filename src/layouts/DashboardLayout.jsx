@@ -11,10 +11,10 @@ const DashboardLayout = () => {
       <ScrollToTop />
       <Navbar />
       <div className="grid grid-cols-12">
-        <div className="col-span-9">
+        <div className="col-span-8">
           <Outlet />
         </div>
-        <div className="col-span-3">
+        <div className="col-span-4">
           <DashboardMenu />
         </div>
       </div>
