@@ -68,7 +68,7 @@ const Register = () => {
   const saveUserToDb = async (name, email, role) => {
     try {
       const user = { name, email, role };
-      const data = await axios.put("http://localhost:5000/users", user);
+      const data = await axios.put("https://alibris-server.vercel.app/users", user);
       setCreateUserEmail(email);
       console.log(data);
     } catch (error) {
@@ -107,7 +107,7 @@ const Register = () => {
                 <span className="label-text text-xl">Email</span>
               </label>
               <input
-                {...register("email", { required: "email must be provide" })}
+                {...register("email", { required: "*email must be provide" })}
                 aria-invalid={errors.email ? "true" : "false"}
                 type="email"
                 placeholder="example@gmail.com"

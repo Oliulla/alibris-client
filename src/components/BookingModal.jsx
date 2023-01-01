@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 
 const BookingModal = ({ givenModalInfo, setGivenModalInfo }) => {
-  const { email, displayName, bookName, resalePrice, imgUrl } = givenModalInfo;
+  const { email, displayName, bookName, resalePrice, imgUrl, bookingBookId } = givenModalInfo;
 
   const handleBookingSubmit = (e) => {
     e.preventDefault();
@@ -26,10 +26,11 @@ const BookingModal = ({ givenModalInfo, setGivenModalInfo }) => {
       buyerEmail,
       phoneNumber,
       meetLocation,
+      productId: bookingBookId
     };
 
     // send booking to db
-    axios.post('http://localhost:5000/bookings', booking)
+    axios.post('https://alibris-server.vercel.app/bookings', booking)
     .then(data => {
       console.log(data.data.status);
       if(data.data.status) {

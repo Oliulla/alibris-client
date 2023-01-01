@@ -1,12 +1,12 @@
 import React from "react";
 import { toast } from "react-hot-toast";
 
-const PermissionModal = ({ productId, refetch }) => {
+const PermissionModal = ({ productId, productName, refetch }) => {
 
   // delete specific product
   const handleProductDelete = (deletedProductId) => {
 
-    fetch(`http://localhost:5000/myproducts/${deletedProductId}`, {
+    fetch(`https://alibris-server.vercel.app/myproducts/${deletedProductId}`, {
       method: 'Delete',
     })
     .then(res => res.json())
@@ -32,8 +32,8 @@ const PermissionModal = ({ productId, refetch }) => {
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <div className="card-actions items-center flex-col gap-4 mr-10">
-            <h3 className="text-lg font-bold">Are you sure to delete?</h3>
-            <div>
+            <h3 className="text-lg font-bold">Are you sure to delete <strong>{productName}</strong></h3>
+            <div className="flex justify-around">
               <label
                 htmlFor="product-delet-modal"
                 className="btn btn-sm p-2 m-2 btn-warning"

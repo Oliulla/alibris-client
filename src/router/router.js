@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/category/:categoryName',
-                loader: ({params}) => fetch(`http://localhost:5000/category/${params?.categoryName}`),
+                loader: ({params}) => fetch(`https://alibris-server.vercel.app/category/${params?.categoryName}`),
                 element: <PrivateRoute><CategoryBooks /></PrivateRoute>
             },
             {
@@ -97,7 +97,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/payment/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/bookings/payment/${params.id}`),
+                loader: ({params}) => fetch(`https://alibris-server.vercel.app/bookings/payment/${params.id}`),
                 element: <PrivateRoute><BookingPage /></PrivateRoute>
             },
         ]

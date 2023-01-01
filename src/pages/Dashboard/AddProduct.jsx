@@ -57,6 +57,7 @@ const AddProduct = () => {
 
           // save seller product to db under category
           saveSellerProductToDb(sellerProduct);
+          navigate("/dashboard/my-products");
           // .then((res) => res.json())
           // .then((data) => {
           //   console.log(data);
@@ -67,12 +68,11 @@ const AddProduct = () => {
           // .catch((error) => {
           //   console.log(error);
           // });
-          // navigate("/dashboard/my-products");
         }
       });
 
     // // save seller products to db
-    // fetch("http://localhost:5000/sellerProduct", {
+    // fetch("https://alibris-server.vercel.app/sellerProduct", {
     //   method: "PUT",
     //   headers: {
     //     "content-type": "application/json",
@@ -94,13 +94,13 @@ const AddProduct = () => {
   return (
     <div className="mx-auto px-4 md:px-10 my-5 md:my-10">
       <div className="mb-6">
-        <h2 className="text-center text-secondary text-3xl border-b-2 border-info">
+        <h2 className="text-center text-secondary text-3xl border-b-2 border-info font-semibold">
           Add A product
         </h2>
       </div>
       <form
         onSubmit={handleSubmit(handleAddProduct)}
-        className="grid grid-cols-1 md:grid-cols-2 w-11/12 md:w-9/12 gap-3 md:gap-0 mx-auto"
+        className="grid grid-cols-1 md:grid-cols-2 w-11/12 md:w-9/12 md:gap-6 mx-auto"
       >
         <div className="form-control w-full max-w-xs">
           <label className="label">
@@ -248,11 +248,14 @@ const AddProduct = () => {
             className="w-full max-w-xs input-info"
           />
         </div>
-        <input
-          type="submit"
-          value="Submit"
-          className="btn btn-primary w-full max-w-xs mt-8"
-        />
+        <div>
+          <p className="text-red-500 font-semibold">*every field is required except description</p>
+          <input
+            type="submit"
+            value="Submit"
+            className="btn btn-primary w-full max-w-xs"
+          />
+        </div>
       </form>
     </div>
   );

@@ -17,34 +17,35 @@ const CategoryBooks = () => {
     bookName: "",
     resalePrice: "",
     imgUrl: "",
+    bookId: "",
   });
 
       
-    useEffect(() => {
-      // Loading function to load data or 
-      // fake it using setTimeout;
-      const loadData = async () => {
+    // useEffect(() => {
+    //   // Loading function to load data or 
+    //   // fake it using setTimeout;
+    //   const loadData = async () => {
   
-        // Wait for two second
-        await new Promise((r) => setTimeout(r, 2000));
+    //     // Wait for two second
+    //     await new Promise((r) => setTimeout(r, 2000));
   
-        // Toggle loading state
-        setLoading((loading) => !loading);
-      };
+    //     // Toggle loading state
+    //     setLoading((loading) => !loading);
+    //   };
         
-      loadData();
-    }, [])
+    //   loadData();
+    // }, [])
 
-    if(loading) {
-      <Loading />
-    }
+    // if(loading) {
+    //   <Loading />
+    // }
 
   // get single products to see products category name.
   const productCategoryName = data.find(book => book.categoryName);
   // console.log(productCategoryName);
 
 
-  const handleBooking = (bookName, resalePrice, imgURL) => {
+  const handleBooking = (bookName, resalePrice, imgURL, bookingBookId) => {
     // console.log(bookName, resalePrice)
     setGivenModalInfo({
       email: email,
@@ -52,6 +53,7 @@ const CategoryBooks = () => {
       bookName: bookName,
       resalePrice: resalePrice,
       imgUrl: imgURL,
+      bookingBookId
     });
   };
 

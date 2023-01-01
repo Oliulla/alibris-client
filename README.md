@@ -4,6 +4,7 @@
     * JavaScript
     * React
     * mongodb
+    * nodejs
     * express.js
     * tailwind css
     * daisyUi
@@ -12,7 +13,8 @@
     * mongodb CRUD operations
     * responsive for mobile and desktop
     * firebase auth
-    * user dashboard
+    * different routing for user/seller/admin
+    * jwt authorization
 
 * Live Link: [alibris](https://alibris-fc03d.web.app)
 

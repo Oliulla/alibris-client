@@ -16,19 +16,23 @@ const Books = ({ book, handleBooking }) => {
     postDate,
     sellerName,
     bookImgUrl,
+    status,
+    _id,
+    isAvailable
   } = book;
 
-  const handleWishlist = (bookName, resalePrice, imgURL) => {
+  const handleWishlist = (bookName, resalePrice, imgURL, productId) => {
     const wishlistProduct = {
       email: user?.email,
       displayName: user?.displayName,
       bookName: bookName,
       resalePrice: resalePrice,
       imgUrl: imgURL,
+      productId,
     };
 
     axios
-      .post("http://localhost:5000/mywishlist", wishlistProduct)
+      .post("https://alibris-server.vercel.app/mywishlist", wishlistProduct)
       .then((data) => {
         console.log(data);
         toast.success(`Successfully ${bookName} added in wishlist!!!`);
@@ -67,27 +71,36 @@ const Books = ({ book, handleBooking }) => {
             <p className="flex">
               <span className="text-xl text-white px-2 rounded-sm bg-gray-900 flex justify-center items-center ml-2">
                 {sellerName}
-                <span className="text-blue-500">
-                  <HiCheckCircle />
-                </span>
+                {status === "Verified" && (
+                  <span className="text-blue-500">
+                    <HiCheckCircle />
+                  </span>
+                )}
               </span>
             </p>
           </div>
         </div>
+        {
+
+        }
         <div className="card-actions justify-end">
           <button
-            onClick={() => handleWishlist(bookName, resalePrice, bookImgUrl)}
+            onClick={() =>
+              handleWishlist(bookName, resalePrice, bookImgUrl, _id)
+            }
             htmlFor="booking-modal"
-            className="btn btn-accent text-base-100"
+            className={`btn btn-accent text-base-100 ${!isAvailable && "btn-disabled bg-gray-300"}`}
           >
             Add Wishlist
           </button>
           <label
-            onClick={() => handleBooking(bookName, resalePrice, bookImgUrl)}
+            onClick={() =>
+              handleBooking(bookName, resalePrice, bookImgUrl, _id)
+            }
             htmlFor="booking-modal"
-            className="btn btn-primary text-base-100"
+            className={`btn btn-primary text-base-100 ${!isAvailable && "btn-disabled bg-gray-300"}`}
           >
-            Book Now
+            {isAvailable ? <span>Book Now</span> : "Booked"}
           </label>
         </div>
       </div>

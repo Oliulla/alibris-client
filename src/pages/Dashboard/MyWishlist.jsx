@@ -14,7 +14,7 @@ const MyWishlist = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`http://localhost:5000/myWishlists/${user?.email}`, {
+      .get(`https://alibris-server.vercel.app/myWishlists/${user?.email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -47,7 +47,7 @@ const MyWishlist = () => {
                     <th>Image</th>
                     <th>Name</th>
                     <th>Price</th>
-                    <th>Action</th>
+                    {/* <th>Action</th> */}
                   </tr>
                 </thead>
                 <tbody>

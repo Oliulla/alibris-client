@@ -14,15 +14,15 @@ const Checkout = ({ booking }) => {
   const [clientSecret, setClientSecret] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-  const { price, buyerName, buyerEmail, _id } = booking;
+  const { price, buyerName, buyerEmail, _id, productId } = booking;
 //   console.log(clientSecret);
     // const {user} = useContext(AuthContext);
 
-    // console.log(booking)
+    // console.log(productId)
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://alibris-server.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,13 +92,14 @@ const Checkout = ({ booking }) => {
             price,
             transactionId: paymentIntent.id,
             buyerEmail,
-            bookingId: _id
+            bookingId: _id,
+            productId
         }
-        console.log("booking id:", _id);
+        // console.log("booking id:", _id, paymentIntent.id);
         // store payment info in db
-        axios.post(`http://localhost:5000/payments`, payment)
+        axios.post(`https://alibris-server.vercel.app/payments`, payment)
         .then(data => {
-            console.log(data);
+            // console.log(data);
             if(data.insertedId) {
                 setSuccess('Congrats! your payment is completed.')
                 setTransactionId(paymentIntent.id);

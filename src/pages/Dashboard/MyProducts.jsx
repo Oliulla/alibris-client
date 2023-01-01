@@ -22,14 +22,14 @@ const MyProducts = () => {
     queryKey: ["myproducts", user?.email],
     queryFn: async () => {
       const data = await axios.get(
-        `http://localhost:5000/myproducts?email=${user?.email}`,
+        `https://alibris-server.vercel.app/myproducts?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          }
+          },
         }
       );
-      
+
       return data?.data?.data;
     },
   });
@@ -44,7 +44,7 @@ const MyProducts = () => {
 
   // advertise items save to db
   const handleAdvertise = (advertiseProduct) => {
-    fetch(`http://localhost:5000/advertiseProducts`, {
+    fetch(`https://alibris-server.vercel.app/advertiseProducts`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -56,6 +56,7 @@ const MyProducts = () => {
         // console.log(data);
         if (data.acknowledged) {
           toast.success("successfully added as advertise items");
+          refetch();
         }
       });
   };
@@ -92,14 +93,23 @@ const MyProducts = () => {
                         {singleProduct.isAvailable ? "Unsold" : "Sold"}
                       </span>
                     </td>
-                    <td>
-                      <button
-                      
-                        className={`btn btn-sm btn-primary text-white font-extrabold ${singleProduct.isAvailable ? undefined : "btn-disabled"}`}
-                        onClick={() => handleAdvertise(singleProduct)}
-                      >
-                        Advertise
-                      </button>
+                    <td
+                      className={`${
+                        singleProduct.isAvailable ? undefined : "btn-disabled"
+                      }`}
+                    >
+                      {singleProduct?.advertised ? (
+                        <span className="text-xl font-semibold text-info">
+                          Advertised
+                        </span>
+                      ) : (
+                        <button
+                          className={`btn btn-sm btn-primary text-white font-extrabold`}
+                          onClick={() => handleAdvertise(singleProduct)}
+                        >
+                          Advertise
+                        </button>
+                      )}
                     </td>
                     <td>
                       {/* <label htmlFor="my-modal-6" className="btn">open modal</label> */}
@@ -112,6 +122,7 @@ const MyProducts = () => {
                       <PermissionModal
                         productId={singleProduct._id}
                         refetch={refetch}
+                        productName={singleProduct.bookName}
                       />
                     </td>
                   </tr>
